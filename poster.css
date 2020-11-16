@@ -1,0 +1,75 @@
+.poster {
+  width: 100%;
+  height: auto;
+}
+.poster__filter {
+  width: 60%;
+  margin-bottom: 40px;
+}
+.poster__item {
+  width: 100%;
+  height: 420px;
+  margin-bottom: 40px;
+  border: 1px solid green;
+}
+.poster__footer {
+  width: 100%;
+  height: 100px;
+}
+.container h1 {
+  font-weight: 700;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+.container p {
+  font-family: Circe;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 32px;
+  padding-right: 30%;
+  margin-bottom: 40px;
+}
+.poster__date {
+  width: 100%;
+  height: 40px;
+}
+.posterdate {
+  width: 200px;
+}
+.poster__city {
+  width: 100%;
+  height: 40px;
+}
+.postercity {
+  width: 200px;
+}
+.poster__performer {
+  width: 100%;
+  height: 40px;
+}
+.posterperformer {
+  width: 250px;
+}
+
+.posterdate,
+.postercity,
+.posterperformer {
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+.poster__input {
+  background-color: #fff;
+}
+.poster__btn {
+  padding-top: 12px;
+  font-size: 18px;
+  line-height: 10.34px;
+  font-weight: 600;
+  border: solid 1px #aa219e;
+  width: 250px;
+  height: 54px;
+  color: #000000;
+  margin: 0 auto;
+  border-radius: 25px;
+  text-align: center;
+}
