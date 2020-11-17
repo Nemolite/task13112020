@@ -51,6 +51,9 @@
         <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -67,6 +70,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -83,6 +89,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -99,6 +108,9 @@
         <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -115,6 +127,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -131,6 +146,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -147,6 +165,9 @@
         <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -163,6 +184,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -179,6 +203,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -195,6 +222,9 @@
         <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -211,6 +241,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -227,6 +260,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -243,6 +279,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -259,6 +298,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -275,6 +317,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -291,6 +336,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -307,6 +355,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
@@ -323,6 +374,9 @@
       <a href="#" class="poster_redirect">
           <div class="poster__item">
             <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster_sale">
+              <p>Бесплатно</p>
+            </div>
             <div class="poster__miniature">               
               <div class="poster__circle">
               <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  

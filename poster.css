@@ -52,12 +52,28 @@
 }
 .poster__item img {
   width: 100%;
-  margin-bottom: 20px;
+}
+
+.poster_sale {
+  position: relative;
+  height: 32px;
+  background-color: #aa219e;
+  border-radius: 25px;
+  top: -45px;
+  left: 10px;
+  display: inline-block;
+}
+
+.poster_sale p {
+  text-align: center;
+  padding: 7px 20px;
+  color: white;
 }
 
 .poster__miniature {
   width: 100%;
   margin-bottom: 18px;
+  margin-top: -10px;
 }
 
 .poster__circle {
