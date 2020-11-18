@@ -50,7 +50,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
         <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+            <div class="poster__img">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/img/BigTwoNewsImg.jpg" alt="" />
+            </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -69,7 +71,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img2.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -88,7 +92,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img3.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -107,7 +113,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
         <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img4.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -126,7 +134,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img5.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -145,7 +155,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img6.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -164,7 +176,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
         <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img1.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -183,7 +197,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img2.jpg" alt="" />
+          </div> 
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -202,7 +218,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img3.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -221,7 +239,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
         <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img4.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -240,7 +260,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img5.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -259,7 +281,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img6.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -278,7 +302,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img1.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -297,7 +323,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img2.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -316,7 +344,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img3.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -335,7 +365,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img4.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -354,7 +386,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img5.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
@@ -373,7 +407,9 @@
       <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">
       <a href="#" class="poster_redirect">
           <div class="poster__item">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/img1.svg" alt="" />
+          <div class="poster__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img6.jpg" alt="" />
+          </div>
             <div class="poster_sale">
               <p>Бесплатно</p>
             </div>
