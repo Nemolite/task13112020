@@ -51,7 +51,7 @@
      *  @hooks allstras_poster_form_before
      *  function get_fileds_afisha, 30
      */
-    ?>
+    ?>   
     <div class="row">
     <?php do_action('allstras_poster_form_before');?>   
     </div>    

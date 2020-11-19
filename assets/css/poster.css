@@ -78,6 +78,17 @@
   font-family: Circe;
 }
 
+.poster_outlink,
+.poster_outlink:hover {
+  text-align: center;
+  padding: 0px 20px;
+  color: white;
+  font-family: Circe;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+
 .poster__miniature {
   width: 100%;
   margin-bottom: 18px;
@@ -109,6 +120,7 @@
 
 .poster_place {
   margin-bottom: 8px;
+  color: #aa219e;
 }
 
 .poster_date {
