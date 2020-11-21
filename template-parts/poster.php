@@ -3,8 +3,7 @@
   Template Name: Афиша
  */
 ?>
-<?php get_header(); ?>
-<form action="" method="POST" >
+<?php get_header();?>
 <div class="poster">
   <div class="container">
     <div class="poster_header">
@@ -14,7 +13,8 @@
          Обратите внимание, что афиша отображается в 
          соответствии с выбранным городом.
       </p>
-    </div>    
+    </div> 
+    <form action="" method="POST" >   
     <div class="poster__filter">
       <div class="row">
         <div class="col-sm-6 col-md-6 col-12">
@@ -46,21 +46,26 @@
         </div>
       </div>          
     </div>
+    </form>
     <?php 
     /**
      *  @hooks allstras_poster_form_before
      *  function get_fileds_afisha, 30
-     */
-    ?>   
-    <div class="row">
-    <?php do_action('allstras_poster_form_before');?>   
-    </div>    
+     */    
+    ?>
+    <div class="row poster_counter" id="show_post2">
+      <?php 
+      $count = 18;
+      $offset = 0; 
+      do_action('allstras_poster_form_before', $count, $offset);
+      ?> 
+    </div>
+    <div id="show_post"></div>             
       <div class="poster__footer">
-        <div class="poster__btn">
-          <input class="poster__input" type="submit" value="Показать еще">
+        <div class="poster__btn" id="poster__btn">
+          <p class="poster__input">Показать еще</p>          
         </div>
-      </div>
-    </div>      
+      </div>      
+    </div>
 </div>
-</form>
 <?php get_footer();

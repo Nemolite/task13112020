@@ -110,12 +110,24 @@ add_action('init', 'allstars_afisha');
 /**
  * The Hook for poster a page. Show dates of the table afisha
  * Function get_fileds_afisha
+ * @param numeric $count
+ * @return template
  */
-add_action('allstras_poster_form_before','get_fileds_afisha',30);
-function get_fileds_afisha(){
+add_action('allstras_poster_form_before','get_fileds_afisha', 30, 2); 
+function get_fileds_afisha( $conut, $offset ){    
     $args = array(
-        'post_type' => 'afisha',
-        'nopaging' => true
+        'post_type' => 'afisha',                   
+        'order' => 'ASC',
+        'offset'=> $offset,
+        'posts_per_page' => $conut,       
+        'meta_query' => array(
+            array(
+                'key' => 'postdate',
+                'value' => date( 'Y-m-d H:i:s', strtotime(' 30 days ') ),
+                'compare' => '<=',
+                'taype' => 'DATETIME',               
+            ),
+        )                   
     );
     $query = new WP_Query($args);
     if( $query->have_posts() ){
@@ -126,8 +138,18 @@ function get_fileds_afisha(){
     }
     wp_reset_postdata();
 }
-?>
 
-
-
-
+add_action('wp_ajax_adding_afisha', 'allstars_adding_afisha_count'); 
+add_action('wp_ajax_nopriv_adding_afisha', 'allstars_adding_afisha_count');
+function allstars_adding_afisha_count(){        
+    if (isset($_POST['addcount'])) { ?>
+    <?php 
+        $offset = $_POST['offset'];
+        $count = $_POST['addcount'];
+    ?>
+        
+            <?php do_action('allstras_poster_form_before', $count, $offset);?> 
+                   
+    <?php }
+    exit;
+} ?>

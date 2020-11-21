@@ -134,9 +134,17 @@
 
 .poster__input {
   background-color: #fff;
+  color: #aa219e;
+  font-size: 16px;
+  font-family: "Nunito";
+  font-weight: 400;
+  cursor: pointer;
+  text-align: center;
 }
 .poster__btn {
-  padding-top: 15px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 18px;
   line-height: 10.34px;
   font-weight: 600;

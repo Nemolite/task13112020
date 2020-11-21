@@ -30,7 +30,7 @@
     </a>  
     <h4><?php echo the_field('poster'); ?></h4>
     <p class="poster_place"><?php echo the_field('posplace'); ?></p>            
-    <p class="poster_date"><?php echo the_field('postdate'); ?></p>
+    <p class="poster_date"><?php echo the_field('postdate'); ?></p>    
   </div>     
 </div> 
      
