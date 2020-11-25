@@ -23,7 +23,7 @@
     <a href="#" class="poster_redirect">
       <div class="poster__miniature">               
         <div class="poster__circle">
-          <img src="<?php echo get_template_directory_uri(); ?>/assets/img/svg/imgmini1.svg" alt="" />                                  
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/imgmini1.jpg" alt="" />                                  
         </div>
           <h6><?php echo the_title(); ?></h6>       
       </div>

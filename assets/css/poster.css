@@ -134,11 +134,10 @@
 
 .poster__input {
   background-color: #fff;
-  color: #aa219e;
+  color: black;
   font-size: 16px;
   font-family: "Nunito";
   font-weight: 400;
-  cursor: pointer;
   text-align: center;
 }
 .poster__btn {
@@ -155,6 +154,7 @@
   margin: 0 auto;
   border-radius: 25px;
   text-align: center;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 575.98px) {
