@@ -139,17 +139,79 @@ function get_fileds_afisha( $conut, $offset ){
     wp_reset_postdata();
 }
 
+/**
+ * The Hook for poster a page. 
+ * Adding 3 postes in the table afisha
+ * Function allstars_adding_afisha_count
+ * 
+ * @return void
+ */
+
 add_action('wp_ajax_adding_afisha', 'allstars_adding_afisha_count'); 
 add_action('wp_ajax_nopriv_adding_afisha', 'allstars_adding_afisha_count');
 function allstars_adding_afisha_count(){        
-    if (isset($_POST['addcount'])) { ?>
-    <?php 
+    if (isset($_POST['addcount'])) { 
         $offset = $_POST['offset'];
         $count = $_POST['addcount'];
-    ?>
-        
-            <?php do_action('allstras_poster_form_before', $count, $offset);?> 
-                   
-    <?php }
+     do_action('allstras_poster_form_before', $count, $offset);                  
+     }
     exit;
-} ?>
+}
+
+/**
+ * The Hook for page-lk a page. 
+ * Update  in the Database postes afisha (poster)_
+ * Function allstars_create_afisha
+ * 
+ * @return void
+ */
+
+add_action('wp_ajax_modal_afisha', 'allstars_create_afisha'); 
+add_action('wp_ajax_nopriv_modal_afisha', 'allstars_create_afisha');
+function allstars_create_afisha(){        
+    if (isset($_POST['nameposter'])) { 
+        $nameposter = $_POST['nameposter'];
+        echo $nameposter;    	
+    }
+	 
+	if (isset($_POST['nameplace'])) { 
+        $nameplace = $_POST['nameplace'];                 
+    }
+	 
+	if (isset($_POST['namecity'])) { 
+        $namecity = $_POST['namecity'];                 
+    }
+	
+	if (isset($_POST['namedate'])) { 
+        $namedate = $_POST['namedate'];                 
+    }
+	
+	if (isset($_POST['nametime'])) { 
+        $nametime = $_POST['nametime'];                 
+    }
+	
+	if (isset($_POST['namefile'])) { 
+        $namefile = $_POST['namefile'];                 
+    }
+	
+	if (isset($_POST['namepied'])) { 
+        $namepied = $_POST['namepied'];                 
+    }
+	
+	if (isset($_POST['nameradiopied'])) { 
+        $nameradiopied = $_POST['nameradiopied'];                 
+    }
+	
+	if (isset($_POST['nameurl'])) { 
+        $nameurl = $_POST['nameurl'];                 
+    }
+	
+	if (isset($_POST['nameuserid'])) { 
+        $nameuserid = $_POST['nameuserid'];                 
+    }
+	
+		
+	
+    exit;
+}
+?>

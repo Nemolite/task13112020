@@ -168,32 +168,41 @@ if(!is_user_logged_in()){
           <h4 class="modal-title" id="exampleModalLabel">Мероприятия</h4>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="" method="POST" name="modal_date" id="modal_date">
             <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Название мероприятия</label>
-              <input type="text" class="form-control" id="recipient-name">
+              <label for="recipient_name" class="form-control-label">Название мероприятия</label>
+              <input type="text" class="form-control" id="recipient_name" name="recipient_name">
             </div>
 			<div class="form-group">
-				<label for="exampleInputFile">Загрузите фото</label>
-				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-				<small id="fileHelp" class="form-text text-muted">Вы можете загрузить фото с будущего мероприятия.(не более 4Мб)</small>
+              <label for="place_name" class="form-control-label">Место проведения мероприятия</label>
+              <input type="text" class="form-control" id="place_name" name="place_name">
+            </div>			
+			<div class="form-group">
+				<label for="exampleSelect1">Город проведения мероприятия</label>
+				<select class="form-control" id="exampleSelect1" name="exampleSelect1">
+				<?php $cities = wpr_promo_static_field('cities');?>
+				<?php foreach($cities as $key => $val){ ?>
+					<option value="<?php echo $key ?>"><?php echo $val ?></option>
+				<?php } ?>										
+				</select>
 			</div>
 			<div class="form-group">
-				<label for="example-number-input">Стоимость</label>  
-				<input class="form-control" type="number" value="42" id="example-number-input">  
+				<label for="example_date_input">Дата проведения мероприятия</label>  
+				<input class="form-control" type="date" placeholder="гггг-мм-дд" id="example_date_input" name="example_date_input">
+			</div>			
+			<div class="form-group">
+				<label for="example_time_input" class="col-xs-2 col-form-label">Время проведения мероприятия</label>  
+				<input class="form-control" type="time" placeholder="чч:мм" id="example_time_input" name="example_time_input">  
 			</div>
 			<div class="form-group">
-				<label for="example-date-input">Date</label>  
-				<input class="form-control" type="date" value="2020-12-12" id="example-date-input">
+				<label for="exampleInputFile">Загрузите фото для анонса мероприятия</label>
+				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="exampleInputFile">
+				<small id="fileHelp" class="form-text text-muted">* Вы можете загрузить фото не более 4Мб</small>
 			</div>
 			<div class="form-group">
-              <label for="place-name" class="form-control-label">Место проведение мероприятия</label>
-              <input type="text" class="form-control" id="place-name">
-            </div>
-			<div class="form-group">
-				<label for="example-time-input" class="col-xs-2 col-form-label">Time</label>  
-				<input class="form-control" type="time" value="13:45:00" id="example-time-input">  
-			</div>
+				<label for="example_number_input">Стоимость</label>  
+				<input class="form-control" type="number" placeholder="2000" id="example_number_input" name="example_number_input">  
+			</div>			
 			<fieldset class="form-group row">				
 				<label for="place-name" class="form-control-label">Мероприятие ( Платное/Бесплатное )</label>
             <div class="col-sm-10">
@@ -212,10 +221,11 @@ if(!is_user_logged_in()){
             </div>
             </fieldset>	
 			<div class="form-group">
-				<label for="example-url-input">Ссылка на официальный сайт</label>			
-				<input class="form-control" type="url" value="http://getbootstrap.com" id="example-url-input">
-			</div>            
-			<input type="submit" name="wpr_promo_submit" class="button button-primary button-large" value="Создать">
+				<label for="example_url_input">Ссылка на официальный сайт</label>			
+				<input class="form-control" type="url" placeholder="http://getbootstrap.com" id="example_url_input" name="example_url_input">
+			</div>
+			<input type="hidden" name="nameuserid" id="nameuserid" value="<?php echo get_current_user_id(); ?>">            
+			<input type="submit" name="modal_submit" id="modal_submit" class="button button-primary button-large" value="Создать">
           </form>
         </div>        
       </div>

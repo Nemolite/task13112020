@@ -254,7 +254,7 @@
       </div>
     </div>
   </div><!-- .single-post -->
-  <!-- Мероприятия -->
+ <!-- Мероприятия -->
   <div class="container">
     <div class="single-afisha">
       <h1>Мероприятия</h1>
@@ -338,7 +338,13 @@
               </div>    
           </div>           
          </div>         
-        </div>        
+        </div> 
+        <div class="single-afisha__footer">
+        <div class="single-afisha__footer-btn" id="single-afisha__footer-btn" >
+            <p class="single-afisha__input">Показать еще</p>
+        </div>
+
+        </div>       
       </div>
   </div>
   <?php

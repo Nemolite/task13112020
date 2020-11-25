@@ -1,4 +1,4 @@
-console.log('poster')
+/* Мероприятия. Добавление карточек по нажаитю на конопку Показать еще */
 jQuery(function($){  
     let elemCount; 
     let offset = 18;  
@@ -21,3 +21,8 @@ jQuery(function($){
         });
     });
 });
+
+
+
+
+
