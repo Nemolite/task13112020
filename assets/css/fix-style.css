@@ -1,15 +1,19 @@
 @charset "UTF-8";
 /*Личный кабинет, модальное окно мероприятие*/
+.show-radio {
+	display:none;
+}
 
 .add_modal {
-	color: #aa219e;	
+	color: #aa219e;
+	margin-top: -9px;	
 }
 
 .add_modal:before {	
 	content: url(../img/poster/Union.jpg);
 	position: relative;
     left: -11px;
-    top: 9px;
+    top: 7px;
 }
 
 .add_modal:focus {

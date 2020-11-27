@@ -168,7 +168,7 @@ if(!is_user_logged_in()){
           <h4 class="modal-title" id="exampleModalLabel">Мероприятия</h4>
         </div>
         <div class="modal-body">
-          <form action="" method="POST" name="modal_date" id="modal_date">
+          <form action="" method="POST" name="modal_date" id="modal_date" enctype="multipart/form-data">
             <div class="form-group">
               <label for="recipient_name" class="form-control-label">Название мероприятия</label>
               <input type="text" class="form-control" id="recipient_name" name="recipient_name">
@@ -195,15 +195,16 @@ if(!is_user_logged_in()){
 				<input class="form-control" type="time" placeholder="чч:мм" id="example_time_input" name="example_time_input">  
 			</div>
 			<div class="form-group">
-				<label for="exampleInputFile">Загрузите фото для анонса мероприятия</label>
-				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="exampleInputFile">
-				<small id="fileHelp" class="form-text text-muted">* Вы можете загрузить фото не более 4Мб</small>
+				<label for="exampleTextarea">Анонс ( Описание мероприятия )</label>
+				<textarea class="form-control" id="exampleTextarea" name="exampleTextarea" rows="3" maxlength="255"></textarea>
 			</div>
 			<div class="form-group">
-				<label for="example_number_input">Стоимость</label>  
-				<input class="form-control" type="number" placeholder="2000" id="example_number_input" name="example_number_input">  
-			</div>			
-			<fieldset class="form-group row">				
+				<label for="exampleInputFile">Загрузите фото для анонса мероприятия</label>							
+				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="exampleInputFile">
+				<small id="fileHelp" class="form-text text-muted">* Вы можете загрузить фото (jpg) не более 4Мб</small>
+				<small id="fileHelp" class="form-text text-muted">* Рекомендуемый размер изображения 400х250</small>
+			</div>						
+			<fieldset class="form-group" id="form-group-radio">				
 				<label for="place-name" class="form-control-label">Мероприятие ( Платное/Бесплатное )</label>
             <div class="col-sm-10">
                <div class="form-check">
@@ -219,19 +220,60 @@ if(!is_user_logged_in()){
                    </label>
                 </div>        
             </div>
-            </fieldset>	
-			<div class="form-group">
+            </fieldset>
+            <div class="form-group show-radio">
+				<label for="example_number_input">Стоимость</label>  
+				<input class="form-control" type="number" placeholder="2000" id="example_number_input" name="example_number_input">  
+			</div>			
+			<div class="form-group show-radio">
 				<label for="example_url_input">Ссылка на официальный сайт</label>			
-				<input class="form-control" type="url" placeholder="http://getbootstrap.com" id="example_url_input" name="example_url_input">
+				<input class="form-control" type="url" placeholder="http://allstars.ru" id="example_url_input" name="example_url_input">
 			</div>
 			<input type="hidden" name="nameuserid" id="nameuserid" value="<?php echo get_current_user_id(); ?>">            
-			<input type="submit" name="modal_submit" id="modal_submit" class="button button-primary button-large" value="Создать">
+			<input type="submit" name="modal_submit1" id="modal_submit1" class="button button-primary button-large" value="Создать">
           </form>
         </div>        
       </div>
-    </div>
+    </div>	
   </div>  
   <!-- Модальное окно -->
+  <div id="result-afisha"></div>
+  <?php show(wp_upload_dir()); ?>
+  <?php show($_POST);?>
+  <?php show($_FILES);?>
+  <?php 
+   // Загрузка файла изображения мероприятия
+	if( wp_verify_nonce( $_POST['fileup_nonce'], 'exampleInputFile' ) ){
+		
+		if ( ! function_exists( 'wp_handle_upload' ) ) 
+		require_once( ABSPATH . 'wp-admin/includes/file.php' );
+		
+        $file = & $_FILES['exampleInputFile'];
+
+		$overrides = [ 'test_form' => false ]; // убрать тестирование
+
+		$movefile = wp_handle_upload( $file, $overrides );		
+		
+	
+		$filename = basename($movefile['file']);
+		$parent_post_id = 608; // $post_id;
+		$filetype = wp_check_filetype( basename( $filename ), null );
+	
+		$attachment = array(
+			'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+			'post_mime_type' => $filetype['type'],
+			'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+			'post_content'   => '',
+			'post_status'    => 'inherit'
+		);
+		$attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
+		require_once( ABSPATH . 'wp-admin/includes/image.php' );
+		$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+		wp_update_attachment_metadata( $attach_id, $attach_data );
+	}	
+  ?>
+  
+  
   
   <?php 
   // Блок отображения отзывов

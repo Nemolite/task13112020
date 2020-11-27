@@ -27,9 +27,10 @@
            <div class="col-sm-6 col-6">
             <div class="poster__city">            
               <select name="postercity" id="postercity" class="postercity">
-                <option value="value1">Казань</option> 
-                <option value="value2" selected>Москва</option>
-                <option value="value3">Нижний Новогород</option>
+                <?php $cities = allstars_get_full_cities();?>
+				<?php foreach($cities as $key => $val){ ?>
+					<option value="<?php echo $key ?>"><?php echo $val ?></option>
+				<?php } ?>	
               </select>
             </div>
            </div>
@@ -38,9 +39,11 @@
         <div class="col-sm-6 col-md-6 col-12">
           <div class="poster__performer">
             <select name="posterperformer" id="posterperformer" class="posterperformer">
-              <option value="" selected>Исполнители</option> 
-              <option value="value2" >Артист1</option>
-              <option value="value3">Артист2</option>
+			    <?php $stars = allstars_get_full_stars_for_afisha();?>
+				<?php foreach($stars as $key => $val){ ?>
+					<option value="<?php echo $key ?>"><?php echo $val ?></option>
+				<?php } ?>
+            
             </select>
           </div>
         </div>
