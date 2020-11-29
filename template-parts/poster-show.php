@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ *  Шаблон вывода афишы
  */
 ?>
 <div class="col-sm-6 col-md-6 col-xl-4 col-lg-4">    

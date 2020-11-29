@@ -197,13 +197,7 @@ if(!is_user_logged_in()){
 			<div class="form-group">
 				<label for="exampleTextarea">Анонс ( Описание мероприятия )</label>
 				<textarea class="form-control" id="exampleTextarea" name="exampleTextarea" rows="3" maxlength="255"></textarea>
-			</div>
-			<div class="form-group">
-				<label for="exampleInputFile">Загрузите фото для анонса мероприятия</label>							
-				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="exampleInputFile">
-				<small id="fileHelp" class="form-text text-muted">* Вы можете загрузить фото (jpg) не более 4Мб</small>
-				<small id="fileHelp" class="form-text text-muted">* Рекомендуемый размер изображения 400х250</small>
-			</div>						
+      </div>      					
 			<fieldset class="form-group" id="form-group-radio">				
 				<label for="place-name" class="form-control-label">Мероприятие ( Платное/Бесплатное )</label>
             <div class="col-sm-10">
@@ -230,51 +224,13 @@ if(!is_user_logged_in()){
 				<input class="form-control" type="url" placeholder="http://allstars.ru" id="example_url_input" name="example_url_input">
 			</div>
 			<input type="hidden" name="nameuserid" id="nameuserid" value="<?php echo get_current_user_id(); ?>">            
-			<input type="submit" name="modal_submit1" id="modal_submit1" class="button button-primary button-large" value="Создать">
+			<input type="submit" name="modal_submit1" id="modal_submit" class="button button-primary button-large" value="Создать">
           </form>
         </div>        
       </div>
     </div>	
   </div>  
-  <!-- Модальное окно -->
-  <div id="result-afisha"></div>
-  <?php show(wp_upload_dir()); ?>
-  <?php show($_POST);?>
-  <?php show($_FILES);?>
-  <?php 
-   // Загрузка файла изображения мероприятия
-	if( wp_verify_nonce( $_POST['fileup_nonce'], 'exampleInputFile' ) ){
-		
-		if ( ! function_exists( 'wp_handle_upload' ) ) 
-		require_once( ABSPATH . 'wp-admin/includes/file.php' );
-		
-        $file = & $_FILES['exampleInputFile'];
-
-		$overrides = [ 'test_form' => false ]; // убрать тестирование
-
-		$movefile = wp_handle_upload( $file, $overrides );		
-		
-	
-		$filename = basename($movefile['file']);
-		$parent_post_id = 608; // $post_id;
-		$filetype = wp_check_filetype( basename( $filename ), null );
-	
-		$attachment = array(
-			'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
-			'post_mime_type' => $filetype['type'],
-			'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
-			'post_content'   => '',
-			'post_status'    => 'inherit'
-		);
-		$attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
-		require_once( ABSPATH . 'wp-admin/includes/image.php' );
-		$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
-		wp_update_attachment_metadata( $attach_id, $attach_data );
-	}	
-  ?>
-  
-  
-  
+  <!-- Модальное окно -->  
   <?php 
   // Блок отображения отзывов
   $args = array( 'post_id' => $post_id, 'post_type' => 'stars', 'status' => 'approve');

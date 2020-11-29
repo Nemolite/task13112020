@@ -21,12 +21,13 @@
           <div class="row">
            <div class="col-sm-6 col-6">
             <div class="poster__date">            
-             <input type="date" value="Дата" name="posterdate" id="posterdate" class="posterdate">
-            </div>
+             <input type="date" name="posterdate" id="posterdate" class="posterdate">
+            </div>                       
            </div>
            <div class="col-sm-6 col-6">
             <div class="poster__city">            
               <select name="postercity" id="postercity" class="postercity">
+              <option value disabled selected>Выберите город</option>
                 <?php $cities = allstars_get_full_cities();?>
 				<?php foreach($cities as $key => $val){ ?>
 					<option value="<?php echo $key ?>"><?php echo $val ?></option>
@@ -39,8 +40,9 @@
         <div class="col-sm-6 col-md-6 col-12">
           <div class="poster__performer">
             <select name="posterperformer" id="posterperformer" class="posterperformer">
+            <option value disabled selected>Выберите исполнителя</option>
 			    <?php $stars = allstars_get_full_stars_for_afisha();?>
-				<?php foreach($stars as $key => $val){ ?>
+        <?php foreach($stars as $key => $val){ ?>          
 					<option value="<?php echo $key ?>"><?php echo $val ?></option>
 				<?php } ?>
             
@@ -49,22 +51,31 @@
         </div>
       </div>          
     </div>
-    </form>
+    </form>   
     <?php 
     /**
      *  @hooks allstras_poster_form_before
      *  function get_fileds_afisha, 30
+     *  
+     *  Выводит афишу всех будущих мероприятий 
+     *  в течение будущих 30 дней
+     * 
+     *  Выводиться  в количестве 18 карточек
+     *  6 рядов по 3 постера 
+     *  По нажатию на кнопку, будет подгружены еще 3 постера
+     *  
      */    
-    ?>
-    <div class="row poster_counter" id="show_post2">
+    ?>    
+    <div class="row poster_counter" id="show_post2">      
       <?php 
-      $count = 18;
-      $offset = 0; 
+      $count = 18; //количество выводимых постов
+      $offset = 0; // смещение от начало постов
       do_action('allstras_poster_form_before', $count, $offset);
       ?> 
     </div>
     <div id="show_post"></div>             
       <div class="poster__footer">
+      <!-- На кнопку привязана событие см. poster.js-->
         <div class="poster__btn" id="poster__btn">
           <p class="poster__input">Показать еще</p>          
         </div>

@@ -57,8 +57,7 @@ jQuery(function($){
 		const nameplace =  document.forms.modal_date.place_name.value;		
 		const namecity =  document.forms.modal_date.exampleSelect1.value;		
 		const namedate =  document.forms.modal_date.example_date_input.value;		
-		const nametime =  document.forms.modal_date.example_time_input.value;		
-		const namefile =  document.forms.modal_date.exampleInputFile.files;		
+		const nametime =  document.forms.modal_date.example_time_input.value;				
 		const nameannouncement =  document.forms.modal_date.exampleTextarea.value;		
 		const namepied =  document.forms.modal_date.example_number_input.value;		
 		const nameradiopied =  document.forms.modal_date.gridRadios.value;		
@@ -72,8 +71,7 @@ jQuery(function($){
 			'namecity': namecity,
 			'namedate': namedate,
 			'nametime': nametime,
-			'nameannouncement':nameannouncement,
-			'namefile': namefile,
+			'nameannouncement':nameannouncement,			
 			'namepied': namepied,
 			'nameradiopied': nameradiopied,
 			'nameurl':nameurl,
@@ -83,10 +81,8 @@ jQuery(function($){
             url:'/wp-admin/admin-ajax.php', 
             data:data, 
             type:'POST', 
-            success:function(request){
-				console.log('send');
-                $( "#result-afisha" ).html( request );
-				console.log(request);				
+            success:function(request){				
+                $( "#result-afisha" ).html( request );								
             },
 			 error: function( err ) {
 				console.log( err );

@@ -32,6 +32,23 @@
   padding-bottom: 10px;
   border-bottom: 1px solid black;
 }
+
+.posterperformer:focus,
+.postercity:focus,
+.posterdate:focus {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #aa219e;
+}
+
+.posterperformer:hover,
+.postercity:hover,
+.posterdate:hover {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #aa219e;
+}
+
 .posterdate,
 .postercity {
   width: 100%;

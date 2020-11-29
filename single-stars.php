@@ -258,87 +258,12 @@
   <div class="container">
     <div class="single-afisha">
       <h1>Мероприятия</h1>
-       <div class="row">
-         <div class="col-md-4">
-            <div class="single-afisha__img">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img1.jpg" alt="" />
-            </div>
-            <div class="single-afisha__sale" id="single-afisha__sale">
-              <p>Бесплатно</p>
-            </div>
-         </div>  
-         <div class="col-md-8">
-          <div class="single-afisha__txt">
-             <h4>Концерт</h4>
-              <p class="single-afisha_place">Паб Records</p>
-              <p class="single-afisha_date">23 октября 2020, 19:00</p>
-              <p class="single-afisha_description">Описание мероприятия. 
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия. 
-               Описание мероприятия. Описание мероприятия.             
-              </p> 
-              <div class="single-afisha__btn"> 
-                <p>Купить билет</p>          
-              </div>    
-          </div>           
-         </div>         
-        </div> 
-        <div class="row">
-         <div class="col-md-4">
-            <div class="single-afisha__img">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img1.jpg" alt="" />
-            </div>
-            <div class="single-afisha__sale" id="single-afisha__sale">
-              <p>Бесплатно</p>
-            </div>
-         </div>  
-         <div class="col-md-8">
-          <div class="single-afisha__txt">
-             <h4>Концерт</h4>
-              <p class="single-afisha_place">Паб Records</p>
-              <p class="single-afisha_date">23 октября 2020, 19:00</p>
-              <p class="single-afisha_description">Описание мероприятия. 
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия. 
-               Описание мероприятия. Описание мероприятия.             
-              </p> 
-              <div class="single-afisha__btn"> 
-                <p>Купить билет</p>          
-              </div>    
-          </div>           
-         </div>         
-        </div> 
-        <div class="row">
-         <div class="col-md-4">
-            <div class="single-afisha__img">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/poster/img1.jpg" alt="" />
-            </div>
-            <div class="single-afisha__sale" id="single-afisha__sale">
-              <p>Бесплатно</p>
-            </div>
-         </div>  
-         <div class="col-md-8">
-          <div class="single-afisha__txt">
-             <h4>Концерт</h4>
-              <p class="single-afisha_place">Паб Records</p>
-              <p class="single-afisha_date">23 октября 2020, 19:00</p>
-              <p class="single-afisha_description">Описание мероприятия. 
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия.
-               Описание мероприятия.Описание мероприятия. 
-               Описание мероприятия. Описание мероприятия.             
-              </p> 
-              <div class="single-afisha__btn"> 
-                <p>Купить билет</p>          
-              </div>    
-          </div>           
-         </div>         
-        </div> 
+      <?php
+      $conut = 3;
+      $offset = 0;
+      ?>
+      <?php do_action('allstars_single_stars_afisha_show',$conut, $offset)?>
+      <div id="show_afisha_star"></div>              
         <div class="single-afisha__footer">
         <div class="single-afisha__footer-btn" id="single-afisha__footer-btn" >
             <p class="single-afisha__input">Показать еще</p>

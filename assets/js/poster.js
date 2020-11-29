@@ -22,7 +22,76 @@ jQuery(function($){
     });
 });
 
+// Событие после выбора даты
 
+jQuery(function($){    
+    $( "#posterdate" ).change(function() {
+        const posterdate = $('#posterdate').val();                    
+        var data = {
+            'action': 'afisha_date',            
+            'posterdate': posterdate
+        };
+        $.ajax({
+            url:'/wp-admin/admin-ajax.php', 
+            data:data, 
+            type:'POST', 
+            success:function(request){                               
+                $('#show_post2').html(request);
+                $('#poster__btn').hide();                
+                               
+            }
 
+        });
+        
+    });   
+});
+
+// Событие после выбора города
+
+jQuery(function($){    
+    $( "#postercity" ).change(function() {
+        const postercity = $('#postercity').val();                 
+        var data = {
+            'action': 'afisha_city',            
+            'postercity': postercity
+        };
+        $.ajax({
+            url:'/wp-admin/admin-ajax.php', 
+            data:data, 
+            type:'POST', 
+            success:function(request){                                       
+               $('#show_post2').html(request);
+               $('#poster__btn').hide();                
+                               
+            }
+
+        });
+        
+    });   
+});
+
+// Событие после выбора исполнителя
+
+jQuery(function($){    
+    $( "#posterperformer" ).change(function() {
+        const posterperformerid = $('#posterperformer').val();                          
+        var data = {
+            'action': 'afisha_posterperformer',            
+            'posterperformerid': posterperformerid
+        };
+        $.ajax({
+            url:'/wp-admin/admin-ajax.php', 
+            data:data, 
+            type:'POST', 
+            success:function(request){                               
+               $('#show_post2').html(request);
+               $('#poster__btn').hide();          
+                               
+            }
+
+        });
+        
+    });   
+});
 
 

@@ -128,6 +128,12 @@ function get_fileds_afisha( $conut, $offset ){
                 'compare' => '<=',
                 'taype' => 'DATETIME',               
             ),
+            array(
+                'key'           => 'postdate',                
+                'value'         =>  date('Y-m-d H:i:s'),
+                'compare'       => '>=',
+                'type'          => 'DATETIME',
+            )
         )                   
     );
     $query = new WP_Query($args);
@@ -164,7 +170,7 @@ function allstars_adding_afisha_count(){
  * Update  in the Database postes afisha (poster)_
  * Function allstars_create_afisha
  *
- * Создание нового мероприятия
+ * Создание нового мероприятия  (в разработке...)
  * 
  * @return void
  */
@@ -175,7 +181,7 @@ function allstars_create_afisha(){
     // Название мероприятия
     if (isset($_POST['nameposter'])) { 
         $nameposter = $_POST['nameposter'];
-        echo $nameposter;    	
+        echo $nameposter;
     }	
 	// Место проведения мероприятия 
 	if (isset($_POST['nameplace'])) { 
@@ -202,11 +208,6 @@ function allstars_create_afisha(){
         echo $nameannouncement;    	
     }	
 	
-	// Загрузка файла анонса мероприятия
-	if (isset($_POST['namepied'])) { 
-        $namepied = $_POST['namepied'];                 
-    }
-	
 	// option1 - бесплатное, option2 - платное 
 	if (isset($_POST['nameradiopied'])) { 
         $nameradiopied = $_POST['nameradiopied']; 
@@ -221,10 +222,11 @@ function allstars_create_afisha(){
 	if (isset($_POST['nameurl'])) { 
         $nameurl = $_POST['nameurl'];                 
     }
-	// ID - ???
+	// ID - Исполнителя
 	if (isset($_POST['nameuserid'])) { 
-        $nameuserid = $_POST['nameuserid'];                 
-    }
+        $nameuserid = $_POST['nameuserid'];
+                     
+    }    
 	
 	// Заполнение стандартных полей произвольных записей (Мероприятия)
 	if ( !isset( $post_id ) ) { 
@@ -235,67 +237,225 @@ function allstars_create_afisha(){
 			'post_content'=>$nameannouncement  // Анонс мероприятия
 		));
 	}
-
-    // Загрузка файла изображения мероприятия
-	if( wp_verify_nonce( $_POST['fileup_nonce'], 'exampleInputFile' ) ){
-		
-		if ( ! function_exists( 'wp_handle_upload' ) ) 
-		require_once( ABSPATH . 'wp-admin/includes/file.php' );
-		
-        $file = & $_FILES['exampleInputFile'];
-
-		$overrides = [ 'test_form' => false ]; // убрать тестирование
-
-		$movefile = wp_handle_upload( $file, $overrides );		
-		
-	
-		$filename = basename($movefile['file']);
-		$parent_post_id = $post_id;
-		$filetype = wp_check_filetype( basename( $filename ), null );
-	
-		$attachment = array(
-			'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
-			'post_mime_type' => $filetype['type'],
-			'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
-			'post_content'   => '',
-			'post_status'    => 'inherit'
-		);
-		$attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
-		require_once( ABSPATH . 'wp-admin/includes/image.php' );
-		$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
-		wp_update_attachment_metadata( $attach_id, $attach_data );
-	}
-	
 	
 	// Заполнение произвольных полей (Афиша) произвольных записей (Мероприятия)
     update_post_meta( $post_id, 'poster', $nameposter ); // Назавание мероприятия
-	update_post_meta( $post_id, 'posplace', $nameplace ); // Место проведения мероприятия
-    
+	update_post_meta( $post_id, 'posplace', $nameplace ); // Место проведения мероприятия    
     update_post_meta( $post_id, 'postsale', $nameradiopied ); // Переключатель платное/бесплатное	
 	update_post_meta( $post_id, 'postsaleurl', $nameurl ); // Ссылка на официальный сайт
     update_post_meta( $post_id, 'ticketprice', $namepied ); // Стоимость билета
-    update_post_meta( $post_id, 'postdate', $event_etime ); // Дата и Время
+    update_post_meta( $post_id, 'postdate', $event_etime ); // Дата и Время         
+    update_post_meta( $post_id, '_field_5fb887283861d', $nameuserid); // _posperformer   
 	
     exit;
 }
 
 /**
-* Получение полного списка исполнителей из базы данных
+* Получение списка users
 *
 */
 
-function allstars_get_full_stars_for_afisha(){
+function allstars_get_users_accunt(){
 	global $wpdb;	
 	$new_array = array();  
 	$table_name = $wpdb->prefix . "users";
 		if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name) {
-			$stars = $wpdb->get_results("SELECT display_name FROM $table_name");
+			$stars = $wpdb->get_results("SELECT id, display_name FROM $table_name");
 				if($stars){
 					foreach($stars as $star){
-					$new_array[$star->display_name] = $star->display_name;
+					$new_array[$star->id] = $star->display_name;
 					}
 				}
 		}
 	return $new_array;
 }
-?>
+
+/**
+* Получение списка исполнителей (из раздела stars)
+*
+*/
+
+function allstars_get_full_stars_for_afisha(){
+    $result_array = array();
+    $args = array(
+        'post_type' => 'stars',
+        'posts_per_page' => -1,                               
+               
+    );
+    $query = new WP_Query($args);
+    if( $query->have_posts() ){
+        while( $query->have_posts() ){            
+            $query->the_post();    
+            $result_array[get_the_ID()] = get_the_title();         
+        }       
+    }
+    wp_reset_postdata();	
+	return $result_array;
+}
+
+/**
+ * Фильтр для афишы по дате  afisha_date
+ */
+
+add_action('wp_ajax_afisha_date', 'allstars_afisha_date'); 
+add_action('wp_ajax_nopriv_afisha_date', 'allstars_afisha_date');
+function allstars_afisha_date(){    
+    if (isset($_POST['posterdate'])){
+        $posterdate = $_POST['posterdate'];
+    }  
+    $date = $posterdate;
+    $datetime = new DateTime($date);
+    $datetime->modify('+1 day');
+    $date_nxt = $datetime->format('Y-m-d');    
+    $datetime->modify('-1 day');
+    $date_prv = $datetime->format('Y-m-d');
+   
+    $args = array(
+        'post_type' => 'afisha',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key'           => 'postdate',                
+                'value'         => $date_prv,
+                'compare'       => '>',
+                'type'          => 'DATETIME',              
+            ),           
+            array(
+                'key'           => 'postdate',                
+                'value'         => $date_nxt,
+                'compare'       => '<',
+                'type'          => 'DATETIME',              
+            ),                          
+        ),         
+    );
+    $query = new WP_Query($args);
+    if( $query->have_posts() ){
+        while( $query->have_posts() ){            
+            $query->the_post();                                    
+            get_template_part( 'template-parts/poster', 'show');           
+        }       
+    }
+    wp_reset_postdata();    
+    wp_die();
+}
+
+/**
+ * Фильтр для афишы по городу  afisha_date
+ */
+
+add_action('wp_ajax_afisha_city', 'allstars_afisha_city'); 
+add_action('wp_ajax_nopriv_afisha_city', 'allstars_afisha_city');
+function allstars_afisha_city(){    
+    if (isset($_POST['postercity'])){
+        $postercity = $_POST['postercity'];
+    } 
+   
+    $args = array(
+        'post_type' => 'afisha',
+        'meta_query' => array(            
+            array(
+                'key'           => 'poscity',                
+                'value'         => $postercity,
+                'compare'       => '=',                              
+            ),                             
+        ),         
+    );
+    $query = new WP_Query($args);
+    if( $query->have_posts() ){
+        while( $query->have_posts() ){            
+            $query->the_post();                                    
+            get_template_part( 'template-parts/poster', 'show');           
+        }       
+    }
+    wp_reset_postdata();    
+    wp_die();
+}
+
+/**
+ * Фильтр для афишы по исполниелю  afisha_date
+ */
+
+add_action('wp_ajax_afisha_posterperformer', 'allstars_afisha_posterperformer'); 
+add_action('wp_ajax_nopriv_afisha_posterperformer', 'allstars_afisha_posterperformer');
+function allstars_afisha_posterperformer(){    
+    if (isset($_POST['posterperformerid'])){
+        $posterperformerid = $_POST['posterperformerid'];
+    } 
+   
+    $args = array(
+        'post_type' => 'afisha',
+        'meta_query' => array(            
+            array(
+                'key'           => '_field_5fb887283861d',                
+                'value'         => $posterperformerid,
+                'compare'       => '=',                              
+            ),                             
+        ),                 
+    );
+    $query = new WP_Query($args);
+    if( $query->have_posts() ){
+        while( $query->have_posts() ){            
+            $query->the_post();                                    
+            get_template_part( 'template-parts/poster', 'show');           
+        }       
+    }
+    wp_reset_postdata();    
+    wp_die();
+}
+
+/**
+ *  Вывод мароприятий на странице артиста
+ * 
+ */
+
+add_action('allstars_single_stars_afisha_show','allstar_poster_show_single', 40, 2);
+function allstar_poster_show_single( $conut, $offset ){    
+    $args = array(
+        'post_type' => 'afisha',                   
+        'order' => 'ASC',
+		'orderby' => 'meta_value',
+        'offset'=> $offset,
+        'posts_per_page' => $conut,       
+        'meta_query' => array(
+            array(
+                'key' => 'postdate',
+                'value' => date( 'Y-m-d H:i:s', strtotime(' 30 days ') ),
+                'compare' => '<=',
+                'taype' => 'DATETIME',               
+            ),
+            array(
+                'key'           => 'postdate',                
+                'value'         =>  date('Y-m-d H:i:s'),
+                'compare'       => '>=',
+                'type'          => 'DATETIME',
+            )
+        )                   
+    );	
+
+    $query = new WP_Query($args);
+    if( $query->have_posts() ){
+        while( $query->have_posts() ){            
+            $query->the_post();                                    
+            get_template_part( 'template-parts/singlestars', 'afisha');           
+        }       
+    }
+    wp_reset_postdata(); 
+
+} 
+
+/**
+ *  Добавление одного мероприятия в раздел артиста
+ *  
+ */
+
+ //show_afisha_star
+ add_action('wp_ajax_show_afisha_star', 'show_afisha_star_count'); 
+ add_action('wp_ajax_nopriv_show_afisha_star', 'show_afisha_star_count');
+ function show_afisha_star_count(){        
+     if (isset($_POST['showcount'])) { 
+         $offset = $_POST['offset'];
+         $count = $_POST['showcount'];
+      do_action('allstars_single_stars_afisha_show', $count, $offset);                  
+      }
+     exit;
+ }

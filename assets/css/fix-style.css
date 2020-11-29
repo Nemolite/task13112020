@@ -1,29 +1,29 @@
 @charset "UTF-8";
 /*Личный кабинет, модальное окно мероприятие*/
 .show-radio {
-	display:none;
+  display: none;
 }
 
 .add_modal {
-	color: #aa219e;
-	margin-top: -9px;	
+  color: #aa219e;
+  margin-top: -9px;
 }
 
-.add_modal:before {	
-	content: url(../img/poster/Union.jpg);
-	position: relative;
-    left: -11px;
-    top: 7px;
+.add_modal:before {
+  content: url(../img/poster/Union.jpg);
+  position: relative;
+  left: -11px;
+  top: 7px;
 }
 
 .add_modal:focus {
-	color: #aa219e;
-	box-shadow: none;
+  color: #aa219e;
+  box-shadow: none;
 }
 
 .add_modal:hover {
-	color: #aa219e;
-	box-shadow: none;
+  color: #aa219e;
+  box-shadow: none;
 }
 /* Мероприятия */
 .single-afisha {
@@ -40,6 +40,26 @@
 .single-afisha__img {
   width: 95%;
   height: 240px;
+}
+
+.single-afisha__img img {
+  width: 95%;
+  height: 100%;
+}
+
+.poster_outlink,
+.poster_outlink:hover {
+  text-align: center;
+  padding: 0px 20px;
+  color: white;
+  font-family: Circe;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.poster_outlink {
+  text-align: center;
 }
 
 .single-afisha__sale {
