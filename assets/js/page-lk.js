@@ -42,8 +42,10 @@ jQuery(document).ready(function($){
 jQuery(function($){ 
 	$("#form-group-radio").change(function() {
 		if ($("#gridRadios1").prop("checked")) {
+      $('.show-radio-reg').css("display", "block");
 			$('.show-radio').css("display", "none");  
-		} else {
+		} else {      
+      $('.show-radio-reg').css("display", "none");
 			$('.show-radio').css("display","block" );  
 		}
 	});
@@ -61,7 +63,8 @@ jQuery(function($){
 		const nameannouncement =  document.forms.modal_date.exampleTextarea.value;		
 		const namepied =  document.forms.modal_date.example_number_input.value;		
 		const nameradiopied =  document.forms.modal_date.gridRadios.value;		
-		const nameurl =  document.forms.modal_date.example_url_input.value;	
+    const nameurl =  document.forms.modal_date.example_url_input.value;	
+    const nameurlreg =  document.forms.modal_date.example_url_reg.value;	
 		const nameuserid =  document.forms.modal_date.nameuserid.value;		
 				
         var data = {
@@ -74,7 +77,8 @@ jQuery(function($){
 			'nameannouncement':nameannouncement,			
 			'namepied': namepied,
 			'nameradiopied': nameradiopied,
-			'nameurl':nameurl,
+      'nameurl':nameurl,
+      'nameurlreg':nameurlreg,
 			'nameuserid': nameuserid					
         };
         $.ajax({

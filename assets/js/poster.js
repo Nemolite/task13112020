@@ -83,9 +83,10 @@ jQuery(function($){
             url:'/wp-admin/admin-ajax.php', 
             data:data, 
             type:'POST', 
-            success:function(request){                               
-               $('#show_post2').html(request);
-               $('#poster__btn').hide();          
+            success:function(request){
+                //$('#test3').html(request);                               
+                $('#show_post2').html(request);
+                $('#poster__btn').hide();          
                                
             }
 
