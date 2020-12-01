@@ -261,6 +261,7 @@
       <?php
       $conut = 3;
       $offset = 0;
+     
       ?>
       <?php do_action('allstars_single_stars_afisha_show',$conut, $offset)?>
       <div id="show_afisha_star"></div>              

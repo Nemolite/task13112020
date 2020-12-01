@@ -3,7 +3,7 @@
   Template Name: Личный кабинет
  */ 
 //access_reg();
-if(!is_user_logged_in()){
+if ( !is_user_logged_in() ){
   get_header(); ?>
  
   <!-- Проверяем авторизацию при входе в личный кабинет 
@@ -217,20 +217,49 @@ if(!is_user_logged_in()){
             </fieldset>
             <div class="form-group show-radio">
 				<label for="example_number_input">Стоимость</label>  
-				<input class="form-control" type="number" placeholder="2000" id="example_number_input" name="example_number_input">  
+				<input class="form-control" type="number" placeholder="от 2000 &#8381" id="example_number_input" name="example_number_input">  
 			</div>			
 			<div class="form-group show-radio">
-				<label for="example_url_input">Ссылка на официальный сайт</label>			
+				<label for="example_url_input">Ссылка на сайт покупки билетов</label>			
 				<input class="form-control" type="url" placeholder="http://allstars.ru" id="example_url_input" name="example_url_input">
-			</div>
-			<input type="hidden" name="nameuserid" id="nameuserid" value="<?php echo get_current_user_id(); ?>">            
-			<input type="submit" name="modal_submit1" id="modal_submit" class="button button-primary button-large" value="Создать">
+      </div>
+
+      <div class="form-group show-radio-reg">
+				<label for="example_url_input">Ссылка на сайт регистрации на мероприятие</label>			
+				<input class="form-control" type="url" placeholder="http://allstars.ru" id="example_url_reg" name="example_url_reg">
+      </div>
+      <?php 
+      $autorid = get_current_user_id();
+      $starsid = allstars_get_id_stars( $autorid );               
+       ?>
+			<input type="hidden" name="nameuserid" id="nameuserid" value="<?php echo $starsid; ?>">            
+			<input type="submit" name="modal_submit" id="modal_submit" class="button button-primary button-large" value="Создать">
           </form>
         </div>        
       </div>
     </div>	
   </div>  
-  <!-- Модальное окно -->  
+  <!-- Модальное окно end-->
+   <!-- Мероприятия -->
+   <div class="container">
+    <div class="single-afisha">
+      <h1>Мероприятия</h1>
+      <?php
+      $conut = 3;
+      $offset = 0;
+     
+      ?>
+      <?php do_action('allstars_single_stars_afisha_show',$conut, $offset)?>
+      <div id="show_afisha_star"></div>              
+        <div class="single-afisha__footer">
+        <div class="single-afisha__footer-btn" id="single-afisha__footer-btn" >
+            <p class="single-afisha__input">Показать еще</p>
+        </div>
+
+        </div>       
+      </div>
+  </div> 
+  <!-- Мероприятия end --> 
   <?php 
   // Блок отображения отзывов
   $args = array( 'post_id' => $post_id, 'post_type' => 'stars', 'status' => 'approve');

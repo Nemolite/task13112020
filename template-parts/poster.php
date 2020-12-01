@@ -41,8 +41,8 @@
           <div class="poster__performer">
             <select name="posterperformer" id="posterperformer" class="posterperformer">
             <option value disabled selected>Выберите исполнителя</option>
-			    <?php $stars = allstars_get_full_stars_for_afisha();?>
-        <?php foreach($stars as $key => $val){ ?>          
+          <?php $roles = wpr_promo_static_field('type_account');?>
+        <?php foreach($roles as $key => $val){ ?>          
 					<option value="<?php echo $key ?>"><?php echo $val ?></option>
 				<?php } ?>
             
@@ -65,7 +65,8 @@
      *  По нажатию на кнопку, будет подгружены еще 3 постера
      *  
      */    
-    ?>    
+    ?>          
+    <div id="test3"></div>   
     <div class="row poster_counter" id="show_post2">      
       <?php 
       $count = 18; //количество выводимых постов
