@@ -38,16 +38,30 @@
         </div> 
       </div>
         <div class="col-sm-6 col-md-6 col-12">
+        <div class="row">
+        <div class="col-sm-6 col-6">
+        <div class="poster__offon">
+          <select name="posteroffon" id="posteroffon" class="posteroffon">
+            <option value disabled selected>Формат мероприятия</option>
+            <option value="Online">Online</option>
+            <option value="Offline">Offline</option>
+			          
+          </select>
+        </div>
+        </div>
+        <div class="col-sm-6 col-6">
           <div class="poster__performer">
             <select name="posterperformer" id="posterperformer" class="posterperformer">
             <option value disabled selected>Выберите исполнителя</option>
           <?php $roles = wpr_promo_static_field('type_account');?>
         <?php foreach($roles as $key => $val){ ?>          
 					<option value="<?php echo $key ?>"><?php echo $val ?></option>
-				<?php } ?>
-            
+				<?php } ?>            
             </select>
           </div>
+        </div>
+        </div>
+
         </div>
       </div>          
     </div>

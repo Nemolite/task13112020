@@ -35,6 +35,10 @@ jQuery(document).ready(function($){
       $(this).find('.acf-input').after(desc);
     }
   });
+  $('.acf-field.main_img').on('change', 'input[type="file"]', function(){
+    console.log('add new image')
+    $(this).closest('form').submit();
+  });
 });
 
 // Скрытие / Открытие полей: Стоимость и Официальный сайт
@@ -56,7 +60,10 @@ jQuery(function($){
 jQuery(function($){      
     $('#modal_submit').on('click',function(){              
 		const nameposter =  document.forms.modal_date.recipient_name.value;		
-		const nameplace =  document.forms.modal_date.place_name.value;		
+    const nameplace =  document.forms.modal_date.place_name.value;
+
+    const nameplaceurl =  document.forms.modal_date.example_url_reg_place.value;		
+
 		const namecity =  document.forms.modal_date.exampleSelect1.value;		
 		const namedate =  document.forms.modal_date.example_date_input.value;		
 		const nametime =  document.forms.modal_date.example_time_input.value;				
@@ -70,16 +77,17 @@ jQuery(function($){
         var data = {
             'action': 'modal_afisha',            
             'nameposter': nameposter,
-			'nameplace': nameplace,
-			'namecity': namecity,
-			'namedate': namedate,
-			'nametime': nametime,
-			'nameannouncement':nameannouncement,			
-			'namepied': namepied,
-			'nameradiopied': nameradiopied,
-      'nameurl':nameurl,
-      'nameurlreg':nameurlreg,
-			'nameuserid': nameuserid					
+            'nameplace': nameplace,
+            'nameplaceurl':nameplaceurl,
+			      'namecity': namecity,
+			      'namedate': namedate,
+			      'nametime': nametime,
+			      'nameannouncement':nameannouncement,			
+			      'namepied': namepied,
+			      'nameradiopied': nameradiopied,
+            'nameurl':nameurl,
+            'nameurlreg':nameurlreg,
+			      'nameuserid': nameuserid					
         };
         $.ajax({
             url:'/wp-admin/admin-ajax.php', 
@@ -94,4 +102,19 @@ jQuery(function($){
         });
     });
 });
+
+// Скрытие / Открытие полей: Online / Offline
+
+jQuery(function($){ 
+	$("#form-group-radio-place").change(function() {
+		if ($("#gridplace1").prop("checked")) {
+      $('.show-radio-reg-place').css("display", "block");
+			$('.show-radio-place').css("display", "none");  
+		} else {      
+      $('.show-radio-reg-place').css("display", "none");
+			$('.show-radio-place').css("display","block" );  
+		}
+	});
+});
+
 

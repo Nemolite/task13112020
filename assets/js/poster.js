@@ -70,6 +70,30 @@ jQuery(function($){
     });   
 });
 
+// Событие после выбора формата мероприятия
+
+jQuery(function($){    
+    $( "#posteroffon" ).change(function() {
+        const posteroffon = $('#posteroffon').val();                 
+        var data = {
+            'action': 'afisha_posteroffon',            
+            'posteroffon': posteroffon
+        };
+        $.ajax({
+            url:'/wp-admin/admin-ajax.php', 
+            data:data, 
+            type:'POST', 
+            success:function(request){                                       
+               $('#show_post2').html(request);
+               $('#poster__btn').hide();                
+                               
+            }
+
+        });
+        
+    });   
+});
+
 // Событие после выбора исполнителя
 
 jQuery(function($){    

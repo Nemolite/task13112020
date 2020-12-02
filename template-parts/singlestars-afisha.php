@@ -11,12 +11,12 @@
             <div class="single-afisha__sale" id="single-afisha__sale">
                 <?php if (! get_field('postsale')) :?>
                     <div class="poster_sale" id="poster_sale">
-                        <p>Бесплатно</p>      
+                    <a class="poster_outlink" id="poster_outlink" href="<?php the_field('postregurl');?>" target="_blank">Бесплатно</a>
                     </div>
                 <?php endif ?>
                 <?php if (get_field('postsale')) :?>
                     <div class="poster_sale" id="poster_sale">      
-                        <a class="poster_outlink" id="poster_outlink" href="<?php the_field('postsaleurl');?>" target="_blank"><?php the_field('ticketprice')?> &#8381;</a>
+                        <a class="poster_outlink" id="poster_outlink" href="<?php the_field('postsaleurl');?>" target="_blank">от <?php the_field('ticketprice')?> &#8381;</a>
                     </div>
                 <?php endif ?>
             </div>

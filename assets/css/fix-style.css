@@ -4,6 +4,10 @@
   display: none;
 }
 
+.show-radio-place {
+  display: none;
+}
+
 .add_modal {
   color: #aa219e;
   margin-top: -9px;
