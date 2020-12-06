@@ -139,7 +139,7 @@ if ( !is_user_logged_in() ){
         'uploader' => 'basic',  // Использовать ли загрузчик WP или обычный input
         'submit_value'  => __('Сохранить', 'allstars'), /* (строка) Текст кнопки отправки формы */
 		
-        'html_submit_button'  => '<button type="button" class="btn add_modal" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Создать мероприятие</button><input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',
+        'html_submit_button'  => '<button type="button" class="btn add_modal" data-toggle="modal" data-target="#servisesModal" data-whatever="@getbootstrap">Управление услугами</button><button type="button" class="btn add_modal" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Создать мероприятие</button><input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',
 		// /* (строка) Код HTML, используемый для рендеринга кнопки отправки формы. */
 		
         'html_before_fields' => '<div class="row">',
@@ -156,8 +156,65 @@ if ( !is_user_logged_in() ){
       )); ?>
 	  <!-- Даные Исполнителя ACF finish -->
     </div>
+  </div>   
+  <!-- Модальное окно Управление услугами-->
+  <div class="modal fade" id="servisesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document" id="modal-dialog-servises">
+  <form action="" method="POST" name="modal_form_servises" id="modal_form_servises" enctype="multipart/form-data">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Управление  услугами</h4>
+      </div>
+      <div class="modal-body">
+
+            <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Наименование услуги</th>
+      <th>Стоимость услуги</th>
+      <th>Add / Del</th>
+    </tr>
+  </thead>
+
+  <tbody >
+  <?php for($idx=1;$idx<=10;$idx++){ ?>
+    <tr class="servisTextareahide<?php echo $idx; ?>" >
+      <th scope="row"><?php echo $idx; ?></th>
+      <td>
+      <div class="form-group servisTextareahide<?php echo $idx; ?>">				
+				<textarea class="form-control" id="servisTextarea<?php echo $idx; ?>" name="servisTextarea<?php echo $idx; ?>" rows="1" maxlength="255"></textarea>
+      </div> 
+      </td>
+      <td>        
+      <input class="form-control" type="number" placeholder="1000" id="servispied<?php echo $idx; ?>" name="servispied<?php echo $idx; ?>">
+      </td>
+      <td>
+      <button type="button" class="btn btn-success" id="plus<?php echo $idx; ?>">+</button>
+    <button type="button" class="btn btn-danger" id="minus<?php echo $idx; ?>">-</button>
+      </td>
+    </tr> 
+   <?php } ?>   
+  </tbody>
+</table>        
+      </div>
+      <div class="modal-footer">       
+       <?php 
+      $autorid = get_current_user_id();
+      $starsid = allstars_get_id_stars( $autorid );               
+       ?>
+        <input type="hidden" name="servisesuserid" id="servisesuserid" value="<?php echo $starsid; ?>">            
+			  <input type="submit" name="modal_servises" id="modal_servises" class="button button-primary button-large" value="Создать">
+      </div>
+    </div>
+  </form>
   </div>
-<!-- Модальное окно -->
+</div> 
+
+<!-- Модальное окно создать мероприятие-->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -173,10 +230,35 @@ if ( !is_user_logged_in() ){
               <label for="recipient_name" class="form-control-label">Название мероприятия</label>
               <input type="text" class="form-control" id="recipient_name" name="recipient_name">
             </div>
-			<div class="form-group">
+
+            <fieldset class="form-group" id="form-group-radio-place">				
+				<label for="place-name" class="form-control-label">Формат мероприятия ( Offline/Online )</label>
+            <div class="col-sm-10">
+               <div class="form-check">
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="gridplace" id="gridplace1" value="place1" checked>
+                  Offline
+                  </label>
+                </div>
+                <div class="form-check">
+                   <label class="form-check-label">
+                   <input class="form-check-input" type="radio" name="gridplace" id="gridplace2" value="place2">
+                   Online 
+                   </label>
+                </div>        
+            </div>
+            </fieldset>
+			
+			<div class="form-group show-radio-reg-place">
               <label for="place_name" class="form-control-label">Место проведения мероприятия</label>
               <input type="text" class="form-control" id="place_name" name="place_name">
-            </div>			
+            </div>		
+
+			<div class="form-group show-radio-place">
+				<label for="example_url_input">Ссылка на сайт мероприятие Online</label>			
+				<input class="form-control" type="url" placeholder="http://allstars.ru" id="example_url_reg_place" name="example_url_reg_place">
+			</div>
+
 			<div class="form-group">
 				<label for="exampleSelect1">Город проведения мероприятия</label>
 				<select class="form-control" id="exampleSelect1" name="exampleSelect1">
@@ -194,6 +276,12 @@ if ( !is_user_logged_in() ){
 				<label for="example_time_input" class="col-xs-2 col-form-label">Время проведения мероприятия</label>  
 				<input class="form-control" type="time" placeholder="чч:мм" id="example_time_input" name="example_time_input">  
 			</div>
+      <div class="form-group">
+				<label for="exampleInputFile">Загрузите фото для анонса мероприятия</label>							
+				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="exampleInputFile">
+				<small id="fileHelp" class="form-text text-muted">* Вы можете загрузить фото (jpg) не более 4Мб</small>
+				<small id="fileHelp" class="form-text text-muted">* Рекомендуемый размер изображения 400х250</small>
+      </div>
 			<div class="form-group">
 				<label for="exampleTextarea">Анонс ( Описание мероприятия )</label>
 				<textarea class="form-control" id="exampleTextarea" name="exampleTextarea" rows="3" maxlength="255"></textarea>
@@ -235,11 +323,12 @@ if ( !is_user_logged_in() ){
 			<input type="hidden" name="nameuserid" id="nameuserid" value="<?php echo $starsid; ?>">            
 			<input type="submit" name="modal_submit" id="modal_submit" class="button button-primary button-large" value="Создать">
           </form>
+          
         </div>        
       </div>
     </div>	
   </div>  
-  <!-- Модальное окно end-->
+  <!-- Модальное окно end-->  
    <!-- Мероприятия -->
    <div class="container">
     <div class="single-afisha">

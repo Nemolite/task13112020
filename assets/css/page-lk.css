@@ -1,0 +1,303 @@
+/* Модальное окно Услуги*/
+
+#modal-dialog-servises {
+  max-width: 700px;
+}
+
+.servisTextareahide2,
+.servisTextareahide3,
+.servisTextareahide4,
+.servisTextareahide5,
+.servisTextareahide6,
+.servisTextareahide7,
+.servisTextareahide8,
+.servisTextareahide9,
+.servisTextareahide10 {
+  display: none;
+}
+
+/* main */
+.acf-form {
+  padding-bottom: 30px;
+}
+.acf-form .acf-fields.-border {
+  background: none;
+  border: none;
+}
+.acf-form .acf-form-submit {
+  text-align: right;
+  margin: 0 -15px;
+}
+.acf-form .acf-form-submit input[type="submit"] {
+  display: inline-block;
+}
+.acf-fields {
+  font-family: Circe;
+  font-size: 18px;
+  line-height: 28px;
+}
+.acf-form .acf-fields > .acf-field {
+  border: none !important;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+.acf-fields .title_none > .acf-label {
+  display: none;
+}
+.acf-fields .acf-field .acf-label label {
+  font-weight: normal;
+}
+.acf-fields
+  .acf-field
+  .acf-input
+  input:not([type="checkbox"]):not([type="radio"]):not([type="search"]):not([type="file"]),
+.acf-fields .acf-field .acf-input textarea {
+  min-height: 40px;
+  font-size: 18px;
+  border: solid 1px #d9d9d9;
+}
+.acf-fields
+  .acf-field
+  .acf-input
+  input:not([type="checkbox"]):not([type="radio"]):not([type="search"]):not([type="file"]):hover,
+.acf-fields
+  .acf-field
+  .acf-input
+  input:not([type="checkbox"]):not([type="radio"]):not([type="search"]):not([type="file"]):focus,
+.acf-fields .acf-field .acf-input textarea:hover,
+.acf-fields .acf-field .acf-input textarea:focus {
+  border-color: #aa219e;
+  -webkit-transition: border 0.1s linear;
+  -o-transition: border 0.1s linear;
+  transition: border 0.1s linear;
+}
+.acf-fields .acf-field p.description {
+  font-size: 14px;
+  line-height: 20px;
+  color: #d9d9d9;
+  font-family: Nunito;
+  margin-top: 6px;
+}
+.acf-required {
+  font-family: sans-serif;
+  color: #aa219e;
+}
+.acf-fields .acf-input-append,
+.acf-fields .acf-input-prepend {
+  font-size: 18px;
+  line-height: 28px;
+  background: none;
+  border: none;
+  display: inline-flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+#group_2 > .acf-input > .acf-fields {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+/* Доп фото и видео */
+.acf-field .icon_bg .acf-input {
+  border: 1px dashed #d9d9d9;
+  max-width: 100%;
+  height: 100px;
+}
+.acf-field .icon_bg .acf-image-uploader,
+.acf-field .icon_bg .hide-if-value,
+.acf-field .icon_bg .acf-basic-uploader,
+.acf-field .icon_bg .acf-input-wrap {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.acf-field .icon_bg .acf-input-wrap {
+  overflow: visible;
+}
+.acf-field .icon_bg .acf-image-uploader .image-wrap {
+  height: 100%;
+  width: 100%;
+  max-width: 100% !important;
+}
+.acf-field .icon_bg .acf-image-uploader .image-wrap img {
+  height: 100%;
+  width: auto;
+  margin: auto;
+}
+.acf-field .icon_bg .acf-basic-uploader:before,
+.acf-field .icon_bg .acf-input-wrap:before {
+  content: "";
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.acf-field .icon_bg.video .acf-basic-uploader:before,
+.acf-field .icon_bg.video .acf-input-wrap:before {
+  background-image: url("../img/mini-video-001.png");
+}
+.acf-field .icon_bg.img .acf-basic-uploader:before {
+  background-image: url("../img/mini-photo.png");
+}
+.acf-field .icon_bg .acf-basic-uploader input[type="file"] {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.acf-field .icon_bg .acf-input-wrap input[type="text"] {
+  position: absolute;
+  display: none;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  width: 300px;
+}
+.acf-field .icon_bg .acf-input-wrap:hover input[type="text"],
+.acf-field .icon_bg .acf-input-wrap input[type="text"]:hover {
+  display: block;
+}
+
+/* Главное фото */
+.acf-fields .main-block > .acf-input .acf-fields {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.acf-field .main_img.icon_bg .acf-input {
+  border: 1px dashed #d9d9d9;
+  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+  height: 360px;
+  position: relative;
+}
+.acf-field .main_img .acf-basic-uploader:before {
+  content: "";
+  display: inline-block;
+  background-image: url("../img/mini-photo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 80px;
+  height: 65px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+.acf-field .main_img .acf-basic-uploader:after {
+  content: "Рекомендуем загружать фото: 520 на 400 px, иначе фото будет обрезано автоматически";
+  font-weight: 300;
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 57%;
+  text-align: center;
+  font-size: 18px;
+  line-height: 24px;
+  color: rgb(177, 177, 177);
+}
+.acf-field .main_img .acf-basic-uploader input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 999;
+}
+/* Файлы */
+.acf-field .acf-file-uploader .acf-basic-uploader {
+  position: relative;
+}
+
+.acf-basic-uploader input {
+}
+
+.acf-field .acf-file-uploader .acf-basic-uploader:before {
+  content: "";
+  display: inline-block;
+  background-image: url(../img/clip.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 13px;
+  height: 24px;
+  margin-right: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.acf-field .acf-file-uploader .acf-basic-uploader:after {
+  content: "Прикрепить файл";
+  font-weight: 300;
+  cursor: pointer;
+}
+.acf-field .acf-file-uploader .acf-basic-uploader input {
+  position: absolute;
+  left: 200px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+/* Checkbox icon */
+.acf-field.icon-check .acf-input label {
+  position: relative;
+  border: 1px solid #d9d9d9;
+  height: 40px;
+  width: 140px;
+  max-width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 300;
+}
+.acf-field.icon-check .acf-input input[type="checkbox"] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.acf-field.icon-check .acf-input label.selected {
+  background-color: #d9d9d9;
+}
+@media (max-width: 480px) {
+  .acf-form .acf-form-submit {
+    text-align: center;
+  }
+  .acf-field .icon_bg .acf-image-uploader .image-wrap {
+    display: flex;
+  }
+  .acf-field .icon_bg .acf-image-uploader .image-wrap img {
+    height: auto;
+  }
+}
+/*#acf-field_5f0da622008a7-field_5f0daf7a008bc {
+  cursor: pointer;
+  border: 1px solid red;
+  font-size: 0;
+}*/
+#group_1 .acf-input {
+  position: sticky;
+  top: 0;
+}

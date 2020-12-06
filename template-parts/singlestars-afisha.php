@@ -27,7 +27,16 @@
               <p class="single-afisha_place"><?php echo the_field('posplace'); ?></p>
               <p class="single-afisha_date"><?php echo the_field('postdate'); ?></p>
               <p class="single-afisha_description"><?php the_content(); ?>       
-              </p>               
+              </p> 
+              <?php if ( get_field('postregurl')) :?>
+              <a id="poster_outlink" href="<?php the_field('postregurl');?>" target="_blank">
+                <div class="single-afisha__btn-invers">
+                    <div class="poster_sale" id="poster_sale">      
+                        <p>Подробнее</p>
+                    </div>
+                </div>
+                </a> 
+                <?php endif ?>              
              <?php if (get_field('postsale')) :?>
                 <a id="poster_outlink" href="<?php the_field('postsaleurl');?>" target="_blank">
                 <div class="single-afisha__btn">
@@ -36,7 +45,16 @@
                     </div>
                 </div>
                 </a>  
-            <?php endif ?>        
+            <?php endif ?>
+            <?php if (! get_field('postsale')) :?>
+                <a id="poster_outlink" href="<?php the_field('postregurl');?>" target="_blank">
+                <div class="single-afisha__btn">
+                    <div class="poster_sale" id="poster_sale">      
+                        <p>Регистрация</p>
+                    </div>
+                </div>
+                </a>  
+            <?php endif ?>         
           </div>           
          </div>         
         </div> 

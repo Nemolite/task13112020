@@ -153,12 +153,10 @@
             <img src="<?php echo $img;?>" alt="<?php $block_right['name'];?>"/>
             <?php endif;?>
 		   </div>
-		   
-		   
                <div class="slider-inner">
                 <a href="https://www.youtube.com/watch?v=<?php echo $media_video;?>" class="video" rel="nofollow">
-       <img src="https://i.ytimg.com/vi/<?php echo $media_video;?>/hqdefault.jpg" alt=""/>
-   </a>
+                  <img src="https://i.ytimg.com/vi/<?php echo $media_video;?>/hqdefault.jpg" alt=""/>
+                </a>
                </div>
                <div class="slider-inner">
                  <a href="<?php echo $block_left['add_img_1']['url'];?>" class="image" rel="gallery">
@@ -170,18 +168,13 @@
                   <img src="<?php echo $block_left['add_img_2']['sizes']['thumbnail'];?>" alt=""/>
                 </a>
                </div>
-			   <div class="slider-inner">
-			   
+			       <div class="slider-inner">			   
                  <a href="<?php echo $block_left['add_img_3']['url'];?>" class="image" rel="gallery">
                   <img src="<?php echo $block_left['add_img_3']['sizes']['thumbnail'];?>" alt=""/>
-                </a>
-				
-				
-               </div>
-             </div>
-  
-         <!-- слайдер finish -->
-	 
+                </a>				
+              </div>
+            </div>  
+         <!-- слайдер finish -->	 
           <div class="rating-block d-lg-flex justify-content-between mb-4 fix-rating-block">
             <?php get_template_part( 'template-parts/rating', 'block');?>
           </div>
@@ -197,15 +190,12 @@
             <div class="subinfo">
               <div class="specialization"><?php echo $user_spec;?></div>
 			  <?php if($user_profile_direction):?>
-
 			   <div class="tags">
                 <?php foreach($user_profile_direction as $user_tag):?>
                 <span><?php echo $user_tag;?></span>
                 <?php endforeach;?>
               </div>
               <?php endif;?>
-			             
-			  
             </div>
           </div>
           <div class="content fix7">
@@ -238,7 +228,7 @@
                   <a class="btn-bg text-center fix-btn-bg" href="#" data-toggle="modal" data-target="#star-contacts">Показать контакты</a>
                 </div>
                 <div class="col-6 col-lg-4 fix-colums">
-                  <a class="btn-bgno text-center" href="#" data-toggle="modal" data-target="#comments-form">Оставить отзыв</a>
+                  <a class="btn-bgno text-center" href="#" data-toggle="modal" data-target="#services">Услуги</a>
                 </div>
               </div>
             </div>
@@ -254,14 +244,52 @@
       </div>
     </div>
   </div><!-- .single-post -->
+  <!-- Платные услуги -->
+<div class="modal fade" id="services" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Предоставляемые услуги</h4>
+      </div>
+      <div class="modal-body">
+      <table class="table table-bordered">
+  <thead>
+    <tr>      
+      <th>Услуга</th>
+      <th>Стоимость</th>      
+    </tr>
+  </thead>
+  <tbody>
+      <?php
+      if( have_rows('servises') ):
+    while ( have_rows('servises') ) : the_row();
+    ?>
+    <tr>      
+    <td><?php echo get_sub_field('servis'); ?></td>
+    <td>от <?php echo get_sub_field('peid_servis'); ?> &#8381</td>   
+  </tr>
+  <?php
+    endwhile;
+else :
+    echo "Услуги не предоставляются";
+endif;
+?>
+</tbody>
+</table>
+      </div>     
+    </div>
+  </div>
+</div>
  <!-- Мероприятия -->
   <div class="container">
     <div class="single-afisha">
       <h1>Мероприятия</h1>
       <?php
       $conut = 3;
-      $offset = 0;
-     
+      $offset = 0;     
       ?>
       <?php do_action('allstars_single_stars_afisha_show',$conut, $offset)?>
       <div id="show_afisha_star"></div>              
@@ -269,7 +297,6 @@
         <div class="single-afisha__footer-btn" id="single-afisha__footer-btn" >
             <p class="single-afisha__input">Показать еще</p>
         </div>
-
         </div>       
       </div>
   </div>
@@ -285,8 +312,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-		  
+          <div class="modal-body">		  
             <div class="title-form mb-4">Контакты</div>
             <div class="contacts row">
               <div class="item col-12 mb-4">
@@ -306,29 +332,20 @@
               <div class="item col-12 mb-4">
                 <span>Варианты оплаты:</span>
                 <div class="paid"> 
-				<?php 
-				//print_r($block_right['payment_method']);
-				/*
-				nal : Наличные
-				cash : Безналичные
-				card : Карта
-				*/
-				
+				<?php 				
 				foreach($block_right['payment_method'] as $many){
 					switch ($many) {
-                       case 'nal':
-                        echo "<p class=work_time >Оплата наличными</p> ";
-		                break;
-                      case 'cash':
-                        echo "<p class=work_time>Безналичный расчет</p> ";
-                        break;
-                      case 'card':
-                        echo "<p class=work_time>Оплата на карту</p> ";
-                        break;
-                    }
+            case 'nal':
+              echo "<p class=work_time >Оплата наличными</p> ";
+		          break;
+            case 'cash':
+              echo "<p class=work_time>Безналичный расчет</p> ";
+              break;
+            case 'card':
+              echo "<p class=work_time>Оплата на карту</p> ";
+              break;                    }
 				}
 				?>
-
               </div>
               <?php endif;?>
               <?php if($block_right['soc_vk']): $link = (filter_var($block_right['soc_vk'], FILTER_VALIDATE_URL)) ? $block_right['soc_vk'] : 'https://vk.com/'.$block_right['soc_vk'];?>
@@ -342,7 +359,6 @@
               </div>
               <?php endif;?>
             </div>
-
           </div>
         </div>
     </div>

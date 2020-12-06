@@ -3,7 +3,7 @@
  *  Шаблон вывода афишы
  */
 ?>
-<?php 
+<?php
 $tmpid = $args['ID'];
 $tmp_arr_stars = get_fields($tmpid);
 $tmp_url = $tmp_arr_stars['block_left']['main_img']['url'];

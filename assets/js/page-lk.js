@@ -55,54 +55,6 @@ jQuery(function($){
 	});
 });
 
-/* AJAX отправление данных с модального окна мероприятия для записи в базу данных */
-
-jQuery(function($){      
-    $('#modal_submit').on('click',function(){              
-		const nameposter =  document.forms.modal_date.recipient_name.value;		
-    const nameplace =  document.forms.modal_date.place_name.value;
-
-    const nameplaceurl =  document.forms.modal_date.example_url_reg_place.value;		
-
-		const namecity =  document.forms.modal_date.exampleSelect1.value;		
-		const namedate =  document.forms.modal_date.example_date_input.value;		
-		const nametime =  document.forms.modal_date.example_time_input.value;				
-		const nameannouncement =  document.forms.modal_date.exampleTextarea.value;		
-		const namepied =  document.forms.modal_date.example_number_input.value;		
-		const nameradiopied =  document.forms.modal_date.gridRadios.value;		
-    const nameurl =  document.forms.modal_date.example_url_input.value;	
-    const nameurlreg =  document.forms.modal_date.example_url_reg.value;	
-		const nameuserid =  document.forms.modal_date.nameuserid.value;		
-				
-        var data = {
-            'action': 'modal_afisha',            
-            'nameposter': nameposter,
-            'nameplace': nameplace,
-            'nameplaceurl':nameplaceurl,
-			      'namecity': namecity,
-			      'namedate': namedate,
-			      'nametime': nametime,
-			      'nameannouncement':nameannouncement,			
-			      'namepied': namepied,
-			      'nameradiopied': nameradiopied,
-            'nameurl':nameurl,
-            'nameurlreg':nameurlreg,
-			      'nameuserid': nameuserid					
-        };
-        $.ajax({
-            url:'/wp-admin/admin-ajax.php', 
-            data:data, 
-            type:'POST', 
-            success:function(request){				
-                $( "#result-afisha" ).html( request );								
-            },
-			 error: function( err ) {
-				console.log( err );
-            }
-        });
-    });
-});
-
 // Скрытие / Открытие полей: Online / Offline
 
 jQuery(function($){ 
@@ -117,4 +69,75 @@ jQuery(function($){
 	});
 });
 
+/* AJAX отправление данных с модального окна мероприятия для записи в базу данных */
 
+
+jQuery(function($){  
+  let files; 
+    $('input[type=file]').on('change', function(){
+       file = this.files;
+       $('#modal_submit').on('click',{param1: file}, function(event){         
+        let modal_date = document.querySelector('#modal_date');
+        let getDateForm = new FormData(modal_date);
+        getDateForm.append("action", "modal_afisha");        
+        $.ajax({
+          url:'/wp-admin/admin-ajax.php', 
+          data:getDateForm,
+          processData : false,
+          contentType : false, 
+          type:'POST', 
+          success:function(request){                       			
+            console.log( request );								
+          },
+          error: function( err ) {
+            console.log( err );            	
+          }
+      });
+
+      });
+    });  
+  }); 
+
+// Управление кнопками + и - 
+
+jQuery(function($){
+  const ShowHide = ( id ) => {  
+	  $(`#plus${id}`).on('click',function() {		
+      $(`.servisTextareahide${id+1}`).show();
+    }); 
+    $(`#minus${id}`).on('click',function() {		
+      $(`.servisTextareahide${id}`).hide();
+    });
+    $(`#minus10`).on('click',function() {		
+      $(`.servisTextareahide10`).hide();
+    });
+}   		
+  for(i=1;i<=9;i++){
+    ShowHide(i);		
+  }
+});
+
+// Прием данных с формы услуги 
+// и передача их на сервер
+
+
+jQuery(function($){  
+  $('#modal_servises').on('click', function(event){         
+    let modal_date = document.querySelector('#modal_form_servises');
+    let getServisesForm = new FormData(modal_date);
+    getServisesForm.append("action", "modal_form_servises");        
+        $.ajax({
+          url:'/wp-admin/admin-ajax.php', 
+          data:getServisesForm,
+          processData : false,
+          contentType : false, 
+          type:'POST', 
+          success:function(request){                      			
+            console.log( request );            								
+          },
+          error: function( err ) {
+            console.log( err );            	
+          }      
+      });
+    });  
+  }); 
