@@ -25,7 +25,7 @@ function universal() {
     return $arr_result;
 }  
 /**
- * Функция получает массив и сортирует его следующимобразом
+ * Функция получает массив и сортирует его следующим образом
  * 2 pro артиста всегда будут 2 -ух верхних позициях
  *  
  *
@@ -141,13 +141,9 @@ function get_fileds_afisha( $conut, $offset ){
     $query = new WP_Query($args);    
     if( $query->have_posts() ){
         while( $query->have_posts() ){            
-            $query->the_post();                               
-            //show($query);
-            $afishaid = get_the_id(); 
-           // echo $afishaid;
-           // echo "  ";
+            $query->the_post();                                   
+            $afishaid = get_the_id();            
             $star_id = get_post_meta( $afishaid, '_staruserid',true ); // Получаем ID звезды из скрытого поля 
-           // echo $star_id;
             
             $posts = get_posts( 
                 array(
@@ -360,178 +356,7 @@ function allstars_get_full_stars_for_afisha(){
 	return $result_array;
 }
 
-/**
- * Фильтр для афишы по дате  afisha_date
- */
 
-add_action('wp_ajax_afisha_date', 'allstars_afisha_date'); 
-add_action('wp_ajax_nopriv_afisha_date', 'allstars_afisha_date');
-function allstars_afisha_date(){    
-    if (isset($_POST['posterdate'])){
-        $posterdate = $_POST['posterdate'];
-    }  
-    $date = $posterdate;
-    $datetime = new DateTime($date);
-    $datetime->modify('+1 day');
-    $date_nxt = $datetime->format('Y-m-d');    
-    $datetime->modify('-1 day');
-    $date_prv = $datetime->format('Y-m-d');
-   
-    $args = array(
-        'post_type' => 'afisha',
-        'meta_query' => array(
-            'relation' => 'AND',
-            array(
-                'key'           => 'postdate',                
-                'value'         => $date_prv,
-                'compare'       => '>',
-                'type'          => 'DATETIME',              
-            ),           
-            array(
-                'key'           => 'postdate',                
-                'value'         => $date_nxt,
-                'compare'       => '<',
-                'type'          => 'DATETIME',              
-            ),                          
-        ),         
-    );
-    $query = new WP_Query($args);
-    if( $query->have_posts() ){
-        while( $query->have_posts() ){            
-            $query->the_post();                                    
-            get_template_part( 'template-parts/poster', 'show');           
-        }       
-    }
-    wp_reset_postdata();    
-    wp_die();
-}
-
-/**
- * Фильтр для афишы по городу  afisha_date
- */
-
-add_action('wp_ajax_afisha_city', 'allstars_afisha_city'); 
-add_action('wp_ajax_nopriv_afisha_city', 'allstars_afisha_city');
-function allstars_afisha_city(){    
-    if (isset($_POST['postercity'])){
-        $postercity = $_POST['postercity'];
-    } 
-   
-    $args = array(
-        'post_type' => 'afisha',
-        'meta_query' => array(            
-            array(
-                'key'           => 'poscity',                
-                'value'         => $postercity,
-                'compare'       => '=',                              
-            ),                             
-        ),         
-    );
-    $query = new WP_Query($args);
-    if( $query->have_posts() ){
-        while( $query->have_posts() ){            
-            $query->the_post();                                    
-            get_template_part( 'template-parts/poster', 'show');           
-        }       
-    }
-    wp_reset_postdata();    
-    wp_die();
-}
-
-/**
- * Фильтр для афишы по формату мероприятия  afisha_posteroffon
- */
-
-add_action('wp_ajax_afisha_posteroffon', 'allstars_afisha_posteroffon'); 
-add_action('wp_ajax_nopriv_afisha_posteroffon', 'allstars_afisha_posteroffon');
-function allstars_afisha_posteroffon(){    
-    if (isset($_POST['posteroffon'])){
-        $tmp_posteroffon = $_POST['posteroffon'];
-    } 
-
-    if('Online'== $tmp_posteroffon) {
-        $posteroffon = true;
-    } else {
-        $posteroffon = false;
-    };
-   
-    $args = array(
-        'post_type' => 'afisha',
-        'meta_query' => array(            
-            array(
-                'key'           => 'on_off',                
-                'value'         => $posteroffon,
-                'compare'       => '=',                              
-            ),                             
-        ),         
-    );
-    $query = new WP_Query($args);
-    if( $query->have_posts() ){
-        while( $query->have_posts() ){            
-            $query->the_post();                                    
-            get_template_part( 'template-parts/poster', 'show');           
-        }       
-    }
-    wp_reset_postdata();    
-    wp_die();
-}
-
-/**
- * Фильтр для афишы по исполниелю  afisha_date
- */
-
-add_action('wp_ajax_afisha_posterperformer', 'allstars_afisha_posterperformer'); 
-add_action('wp_ajax_nopriv_afisha_posterperformer', 'allstars_afisha_posterperformer');
-function allstars_afisha_posterperformer(){  
-    $arr_tmp = array();  
-    if (isset($_POST['posterperformerid'])){
-        $posterperformerid = $_POST['posterperformerid'];        
-    } 
-    $params = array(
-        'role' => $posterperformerid,      
-      );
-      $uq = new WP_User_Query( $params );      
-      foreach ( $uq->results as $u ) {
-        array_push($arr_tmp, $u->ID);
-        }       
-            
-    $tmp_id_stars = allstars_get_id_stars( $arr_tmp );      
-    $arridstras = allstars_get_array_id_afisha( $tmp_id_stars); 
-
-    $args = array(
-        'post_type' =>  'stars',  
-        'author__in' => $arr_tmp,           
-                        
-    );
-
-    $arr_info_stars = array();
-    $query = new WP_Query($args);
-    if( $query->have_posts() ){
-        while( $query->have_posts() ){            
-            $query->the_post();                              
-            $arr_info_stars = get_post();         
-           // ???
-        }       
-    }
-    wp_reset_postdata();  
-    
-    $args = array(
-        'post_type' => 'afisha',
-        'page_in' => $arridstras,           
-                        
-    );
-    $query = new WP_Query($args);
-    if( $query->have_posts() ){
-        while( $query->have_posts() ){            
-            $query->the_post();
-                                                
-            get_template_part( 'template-parts/poster', 'show' );
-                      
-        }       
-    }
-    wp_reset_postdata();
-    wp_die();
-}
 
 /**
  *  Вывод мароприятий на странице и в личном кабинете артиста
@@ -541,7 +366,20 @@ function allstars_afisha_posterperformer(){
 add_action('allstars_single_stars_afisha_show','allstar_poster_show_single', 40, 2);
 function allstar_poster_show_single( $conut, $offset){
     
-    $starsid = get_the_ID();         
+    $starsid = get_the_ID();      
+
+    if( is_page( 'lk' ) ){        
+        $args = array(
+            'post_type' => 'stars',
+            'author' => get_current_user_id(),                        
+        );
+        $post = get_posts($args);        
+        setup_postdata($post);        
+        foreach( $post as $p ){ 
+            $starsid = $p->ID;            
+        }
+        wp_reset_postdata(); 
+   }
               
     $args = array(
         'post_type' => 'afisha',                   
@@ -600,7 +438,7 @@ function allstar_poster_show_single( $conut, $offset){
  * Функция получает ID артиста 
  */
 
-function allstars_get_id_stars( $autorid ){
+function allstars_get_id_stars( $autorid ){    
     $args = array(
         'post_type' => 'stars',
         'author__in' => $autorid,                        
@@ -613,29 +451,151 @@ function allstars_get_id_stars( $autorid ){
     wp_reset_postdata();
     return $result;       	
 }
+/**
+ * 
+ * Функция для получения данных услуг
+ */
 
-/** 
- *  Обработка данных с модального окна услуги
- *  Запись данных в произвольные поля типа repeter
- *    
-*/
-
-add_action('wp_ajax_modal_form_servises', 'allstars_modal_form_servises'); 
-add_action('wp_ajax_nopriv_modal_form_servises', 'allstars_modal_form_servises');
-function allstars_modal_form_servises(){        
-    if (isset($_POST)) { 
-        for($idx = 1;$idx<=10;$idx++){
-            $servis = 'servisTextarea'.$idx;
-            $peid_servis = 'servispied'.$idx;
-            $star_id = $_POST['servisesuserid' ];
-                if(!empty($_POST[$servis ])){
-                    $row = array(
-                        'servis' => $_POST[$servis ],
-                        'peid_servis'   => $_POST[$peid_servis ],                    
-                    );                
-                    add_row('servises', $row, $star_id);
-                }
-        }               
-    }
-    exit;
+add_action('allstars_modal_servises','set_data_vodal_servises',30,1);
+$arr_result = array();
+function set_data_vodal_servises($starid) {
+    if( have_rows('servises',$starid) ):
+        $idx=1;
+        while ( have_rows('servises',$starid) ) : the_row();
+        $arr_result[$idx]['servis'] = get_sub_field('servis',$starid);
+        $arr_result[$idx]['peid_servis'] = get_sub_field('peid_servis',$starid);             
+            $idx++;
+        endwhile;
+    else :
+        $arr_result = array();
+    endif;
+        return $arr_result;
 }
+
+/**
+ * Комплексный фильтр для выбора 4 параметрам
+ * дата, города, формат мероприятия, исполнитель
+ */
+
+add_action('wp_ajax_afisha_super_filter', 'allstars_afisha_super_filter'); 
+add_action('wp_ajax_nopriv_afisha_super_filter', 'allstars_afisha_super_filter');
+function allstars_afisha_super_filter(){   
+    // фильтр по дате 
+    if (isset($_POST['posterdate'])){
+        $posterdate = $_POST['posterdate'];
+        $date = $posterdate;
+        $datetime = new DateTime($date);
+        $datetime->modify('+1 day');
+        $date_nxt = $datetime->format('Y-m-d');    
+        $datetime->modify('-1 day');
+        $date_prv = $datetime->format('Y-m-d');
+
+        $arr_mq_date_prv =  array(
+            'key'           => 'postdate',                
+            'value'         => $date_prv,
+            'compare'       => '>',
+            'type'          => 'DATETIME',              
+        );
+        $arr_mq_date_nxt = array(
+            'key'           => 'postdate',                
+            'value'         => $date_nxt,
+            'compare'       => '<',
+            'type'          => 'DATETIME',              
+        );
+    } 
+    
+    // фильтр по городу 
+    
+    if (isset($_POST['postercity'])){
+        $postercity = $_POST['postercity'];
+        $arr_mq_city = array(
+            'key'           => 'poscity',                
+            'value'         => $postercity,
+            'compare'       => '=',                              
+        );
+    }
+
+    // Фильтр по формату выступления
+
+    if (isset($_POST['posteroffon'])){
+        $tmp_posteroffon = $_POST['posteroffon'];
+        if('Online'== $tmp_posteroffon) {
+            $posteroffon = false;
+        } else {
+            $posteroffon = true;
+        };
+        $arr_mq_on_off =  array(
+            'key'           => 'on_off',                
+            'value'         => $posteroffon,
+            'compare'       => '=',                              
+        );
+    } 
+
+    // Фильтр по исполнителю
+
+    $arr_author_id = array();    
+    if (isset($_POST['posterperformerid'])){
+        $posterperformerid = $_POST['posterperformerid'];
+        $params = array(
+            'role' => $posterperformerid,      
+          );
+        $uq = new WP_User_Query( $params );      
+          foreach ( $uq->results as $u ) {
+            array_push($arr_author_id, $u->ID);
+        }    
+        wp_reset_postdata();                
+    }    
+    $args = array(
+        'post_type' => 'afisha',
+        'author__in' => $arr_author_id,
+        'order' => 'ASC',
+		'orderby' => 'meta_value',
+        'offset'=> $offset,
+        'posts_per_page' => $conut,
+        'meta_query' => array(
+            'relation' => 'AND',
+            $arr_mq_date_prv,           
+            $arr_mq_date_nxt,
+            $arr_mq_city,
+            $arr_mq_on_off,
+            array(
+                'key' => 'postdate',
+                'value' => date( 'Y-m-d H:i:s', strtotime(' 30 days ') ),
+                'compare' => '<=',
+                'taype' => 'DATETIME',               
+            ),
+            array(
+                'key'           => 'postdate',                
+                'value'         =>  date('Y-m-d H:i:s'),
+                'compare'       => '>=',
+                'type'          => 'DATETIME',
+            )                          
+        ),         
+    );
+    
+    $query = new WP_Query($args);
+    if( $query->have_posts() ){
+        while( $query->have_posts() ){            
+            $query->the_post();
+            $afishaid = get_the_id();                       
+            $star_id = get_post_meta( $afishaid, '_staruserid',true ); // Получаем ID звезды из скрытого поля            
+            $posts = get_posts( 
+                array(
+                    'p' =>  $star_id,                   
+                    'post_type'   => 'stars',
+                    'meta_key'    => '',
+	                'meta_value'  =>'',
+                    'suppress_filters' => true, 
+                )
+            );         
+            foreach($posts as $post){               
+                $intemplate = (array)$post;
+            }                                     
+            get_template_part( 'template-parts/poster', 'show',$intemplate);
+            wp_reset_postdata();           
+        }       
+    }
+    wp_reset_postdata();    
+    wp_die();
+}
+

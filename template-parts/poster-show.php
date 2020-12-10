@@ -40,7 +40,7 @@ $tmp_url = $tmp_arr_stars['block_left']['main_img']['url'];
     
     <?php endif ?>
     <?php if (get_field('url_online')) :?>         
-      <a class="poster_place" id="poster_outlink" href="<?php the_field('url_online');?>" target="_blank">Online</a>    
+      <a class="poster_place poster_sale_url" id="poster_outlink" href="<?php the_field('url_online');?>" target="_blank">Online</a>    
     <?php endif ?>
     <p class="poster_date"><?php echo the_field('postdate'); ?></p>    
   </div>     

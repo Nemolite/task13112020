@@ -106,7 +106,6 @@
 .single-afisha_description {
   color: black;
   line-height: 1.5em;
-  font-family: Circe, sans-serif;
   font-weight: 300;
   font-size: 16px;
   margin-bottom: 12px;
@@ -120,6 +119,9 @@
   float: right;
   padding-top: 16px;
   cursor: pointer;
+  position: absolute;
+  bottom: 32px;
+  right: 0;
 }
 
 .single-afisha__btn-invers {
@@ -132,6 +134,8 @@
   cursor: pointer;
   border: solid 1px #aa219e;
   color: black;
+  position: absolute;
+  bottom: 32px;
 }
 
 .single-afisha__btn-invers:hover {
@@ -145,6 +149,8 @@
   border: solid 1px #aa219e;
   background-color: #aa219e;
   color: white;
+  position: absolute;
+  bottom: 32px;
 }
 
 .single-afisha__btn-invers p {
@@ -204,6 +210,13 @@
   font-family: "Nunito";
   font-weight: 700;
   text-align: center;
+}
+
+.single-afisha_place_url {
+  display: flow-root;
+  color: #aa219e;
+  margin-bottom: 11px;
+  text-decoration: none;
 }
 
 /* fix-style */

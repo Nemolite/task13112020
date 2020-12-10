@@ -14,7 +14,7 @@
          соответствии с выбранным городом.
       </p>
     </div> 
-    <form action="" method="POST" >   
+    <form action="" method="POST" name="super_filter" id="super_filter">   
     <div class="poster__filter">
       <div class="row">
         <div class="col-sm-6 col-md-6 col-12">

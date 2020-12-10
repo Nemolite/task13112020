@@ -92,8 +92,7 @@ if ( !is_user_logged_in() ){
         }
       }
 	  // для остальных обнуляем массив
-      if(isset($array_hide[$allstats_role]) && in_array($field['key'], $array_hide[$allstats_role])){
-        //unset($field);
+      if(isset($array_hide[$allstats_role]) && in_array($field['key'], $array_hide[$allstats_role])){        
         $field = array();
       }
     }
@@ -102,21 +101,13 @@ if ( !is_user_logged_in() ){
   }
   // применяем фильтр через хук
   add_filter('acf/prepare_field', 'allstars_acf_prepare_field');
-  // теперь выводим элементы формы
-  /* 
-  acf_form_head() используется для обработки, 
-  проверки и сохранения данных из форм, 
-  созданных с помощью функций acf_form(). 
-  Эта функция вставляет в очередь 
-  все скрипты и стили, связанные с ACF, 
-  для для корректного отображения. 
-  */
+ 
   acf_form_head();
   get_header(); ?> 
   <?php	while ( have_posts() ) : the_post();?>
   <div class="container">
     <div id="main-data" class="data-<?php echo $css_main;?>">
-	<!-- Даные Исполнителя ACF -->
+	<!-- Вывод даных Исполнителя ACF -->
     <?php 
       add_filter('promo_acf_image_crop', 'allstars_promo_acf_image_crop');
       function allstars_promo_acf_image_crop($uploader){
@@ -124,93 +115,46 @@ if ( !is_user_logged_in() ){
         return $uploader;
       }
       acf_form(array(
-        'post_id'       => $post_id, // /* (число|строка) ID поста для загрузки и 
-		                             // сохранения данных. По умолчанию используется 
-									 // текущий ID поста. 
-		
-        'post_title'    => false,    // /* Показывать или нет текстовое 
-		                             // поле для заголовка поста. По умолчанию false */    
-        'post_content'  => false,    // /* Показывать или нет wysiwyg 
-		                             // редактор для редактирования контента поста. 
-									 // По умолчанию false */
-		 
-        /*'field_groups' => array(20),*/
-        /*'fields' => $fields,*/
-        'uploader' => 'basic',  // Использовать ли загрузчик WP или обычный input
-        'submit_value'  => __('Сохранить', 'allstars'), /* (строка) Текст кнопки отправки формы */
-		
-        'html_submit_button'  => '<button type="button" class="btn add_modal" data-toggle="modal" data-target="#servisesModal" data-whatever="@getbootstrap">Управление услугами</button><button type="button" class="btn add_modal" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Создать мероприятие</button><input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',
-		// /* (строка) Код HTML, используемый для рендеринга кнопки отправки формы. */
-		
-        'html_before_fields' => '<div class="row">',
-		// /* (строка) Дополнительный HTML, который будет добавлен перед полями */
-		
-	    'html_after_fields' => '</div>',
-		// /* (строка) Дополнительный HTML, который будет добавлен после полей */
-		
+        'post_id'       => $post_id, 		
+        'post_title'    => false,     
+        'post_content'  => false,
+        'fields' => array('field_5f0da43e008a1','field_5f0da622008a7'),
+        'uploader' => 'basic',  
+        'submit_value'  => __('Сохранить', 'allstars'), 		
+        'html_submit_button'  => '<button type="button" class="btn add_modal" data-toggle="modal" data-target="#servisesModal" data-whatever="@getbootstrap">Управление услугами</button><button type="button" class="btn add_modal" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Создать мероприятие</button><input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',	
+        'html_before_fields' => '<div class="row">',		
+	      'html_after_fields' => '</div>',		
         'updated_message' => __('Информация обновлена', 'allstars')
-		// /* (строка) Сообщение, которое будет выведено перед 
-		// формой после успешного редиректа. 
-		// Если установлено false, 
-		// то сообщение не будет выводиться. */
       )); ?>
-	  <!-- Даные Исполнителя ACF finish -->
+	  <!-- Вывод даных Исполнителя ACF -->
     </div>
   </div>   
   <!-- Модальное окно Управление услугами-->
   <div class="modal fade" id="servisesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document" id="modal-dialog-servises">
-  <form action="" method="POST" name="modal_form_servises" id="modal_form_servises" enctype="multipart/form-data">
-    <div class="modal-content">
+  <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Управление  услугами</h4>
+        <h4 class="modal-title" id="myModalLabel">Управление услугами</h4>
       </div>
       <div class="modal-body">
-
-            <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>№</th>
-      <th>Наименование услуги</th>
-      <th>Стоимость услуги</th>
-      <th>Add / Del</th>
-    </tr>
-  </thead>
-
-  <tbody >
-  <?php for($idx=1;$idx<=10;$idx++){ ?>
-    <tr class="servisTextareahide<?php echo $idx; ?>" >
-      <th scope="row"><?php echo $idx; ?></th>
-      <td>
-      <div class="form-group servisTextareahide<?php echo $idx; ?>">				
-				<textarea class="form-control" id="servisTextarea<?php echo $idx; ?>" name="servisTextarea<?php echo $idx; ?>" rows="1" maxlength="255"></textarea>
-      </div> 
-      </td>
-      <td>        
-      <input class="form-control" type="number" placeholder="1000" id="servispied<?php echo $idx; ?>" name="servispied<?php echo $idx; ?>">
-      </td>
-      <td>
-      <button type="button" class="btn btn-success" id="plus<?php echo $idx; ?>">+</button>
-    <button type="button" class="btn btn-danger" id="minus<?php echo $idx; ?>">-</button>
-      </td>
-    </tr> 
-   <?php } ?>   
-  </tbody>
-</table>        
-      </div>
-      <div class="modal-footer">       
-       <?php 
-      $autorid = get_current_user_id();
-      $starsid = allstars_get_id_stars( $autorid );               
-       ?>
-        <input type="hidden" name="servisesuserid" id="servisesuserid" value="<?php echo $starsid; ?>">            
-			  <input type="submit" name="modal_servises" id="modal_servises" class="button button-primary button-large" value="Создать">
-      </div>
-    </div>
-  </form>
+        <?php
+      acf_form(array(
+        'post_id'       => $post_id,		
+        'post_title'    => false,    
+        'post_content'  => false,   
+        'fields' => array('servises'),
+        'uploader' => 'basic',  
+        'submit_value'  => __('Сохранить', 'allstars'),
+        'html_submit_button'  => '<input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',
+        'html_before_fields' => '<div class="row">',		
+	      'html_after_fields' => '</div>',
+        'updated_message' => __('Информация по услугам обновлена', 'allstars')
+      )); ?>
+      </div>    
+    </div>  
   </div>
 </div> 
 
@@ -247,13 +191,11 @@ if ( !is_user_logged_in() ){
                    </label>
                 </div>        
             </div>
-            </fieldset>
-			
-			<div class="form-group show-radio-reg-place">
+            </fieldset>			
+			     <div class="form-group show-radio-reg-place">
               <label for="place_name" class="form-control-label">Место проведения мероприятия</label>
               <input type="text" class="form-control" id="place_name" name="place_name">
-            </div>		
-
+            </div>
 			<div class="form-group show-radio-place">
 				<label for="example_url_input">Ссылка на сайт мероприятие Online</label>			
 				<input class="form-control" type="url" placeholder="http://allstars.ru" id="example_url_reg_place" name="example_url_reg_place">
@@ -321,7 +263,7 @@ if ( !is_user_logged_in() ){
       $starsid = allstars_get_id_stars( $autorid );               
        ?>
 			<input type="hidden" name="nameuserid" id="nameuserid" value="<?php echo $starsid; ?>">            
-			<input type="submit" name="modal_submit" id="modal_submit" class="button button-primary button-large" value="Создать">
+			<input type="submit" name="modal_submit" id="modal_submit_poster" class="button button-primary button-large" value="Создать">
           </form>
           
         </div>        
@@ -335,9 +277,8 @@ if ( !is_user_logged_in() ){
       <h1>Мероприятия</h1>
       <?php
       $conut = 3;
-      $offset = 0;
-     
-      ?>
+      $offset = 0;         
+      ?>      
       <?php do_action('allstars_single_stars_afisha_show',$conut, $offset)?>
       <div id="show_afisha_star"></div>              
         <div class="single-afisha__footer">
@@ -351,20 +292,8 @@ if ( !is_user_logged_in() ){
   <!-- Мероприятия end --> 
   <?php 
   // Блок отображения отзывов
-  $args = array( 'post_id' => $post_id, 'post_type' => 'stars', 'status' => 'approve');
-  // Параметры запроса 
-  
-  // 'post_id' - ID поста/страницы. функция вернет только комментарии 
-  // к указанному посту или странице.
-  
-  // post_type(строка) Тип записи. 
-  // Будут получены комментарии записей имеющих этот тип. Например page
-  
-  // status(строка)Вернет комментарии с этим статусом. 
-  // approve - одобренные комменты  
-  
-  $comments = get_comments( $args ); 
- // Получает комментарии по указанным параметрам, в виде массива данных.  
+  $args = array( 'post_id' => $post_id, 'post_type' => 'stars', 'status' => 'approve');  
+  $comments = get_comments( $args );   
   if($comments && count($comments) > 0):?>
   <div id="reviews" class="reviews">
     <div class="container">        
@@ -378,8 +307,7 @@ if ( !is_user_logged_in() ){
           <div class="count-reviews"><?php echo $comments_number;?> отзывов</div>
         </div>
       </div>	
-      <?php foreach($comments as $comment){
-		  // Подключаем файл шаблона отображения комментариев comments-item.php
+      <?php foreach($comments as $comment){		  
         get_template_part( 'template-parts/comments', 'item');
       }?>
     </div>

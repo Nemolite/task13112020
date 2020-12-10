@@ -4,18 +4,16 @@
   max-width: 700px;
 }
 
-.servisTextareahide2,
-.servisTextareahide3,
-.servisTextareahide4,
-.servisTextareahide5,
-.servisTextareahide6,
-.servisTextareahide7,
-.servisTextareahide8,
-.servisTextareahide9,
-.servisTextareahide10 {
-  display: none;
+#servisesModal input[type="submit"] {
+  margin-top: -70px;
+  position: relative;
+  top: -34px;
 }
 
+#servises_acf {
+  margin: 0 auto;
+  width: 100%;
+}
 /* main */
 .acf-form {
   padding-bottom: 30px;

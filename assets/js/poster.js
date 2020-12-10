@@ -22,19 +22,21 @@ jQuery(function($){
     });
 });
 
-// Событие после выбора даты
+// Событие после выбора даты, города,
+// формата мероприятия, исполнителя
 
 jQuery(function($){    
-    $( "#posterdate" ).change(function() {
-        const posterdate = $('#posterdate').val();                    
-        var data = {
-            'action': 'afisha_date',            
-            'posterdate': posterdate
-        };
+    $( "#posterdate, #postercity, #posteroffon, #posterperformer" ).change(function() {
+        console.log(111);
+        let super_filter = document.querySelector('#super_filter');
+        let getDateForm = new FormData(super_filter);
+        getDateForm.append("action", "afisha_super_filter"); 
         $.ajax({
             url:'/wp-admin/admin-ajax.php', 
-            data:data, 
-            type:'POST', 
+            data:getDateForm,
+            processData : false,
+            contentType : false,              
+            type:'POST',  
             success:function(request){                               
                 $('#show_post2').html(request);
                 $('#poster__btn').hide();                
@@ -46,77 +48,5 @@ jQuery(function($){
     });   
 });
 
-// Событие после выбора города
-
-jQuery(function($){    
-    $( "#postercity" ).change(function() {
-        const postercity = $('#postercity').val();                 
-        var data = {
-            'action': 'afisha_city',            
-            'postercity': postercity
-        };
-        $.ajax({
-            url:'/wp-admin/admin-ajax.php', 
-            data:data, 
-            type:'POST', 
-            success:function(request){                                       
-               $('#show_post2').html(request);
-               $('#poster__btn').hide();                
-                               
-            }
-
-        });
-        
-    });   
-});
-
-// Событие после выбора формата мероприятия
-
-jQuery(function($){    
-    $( "#posteroffon" ).change(function() {
-        const posteroffon = $('#posteroffon').val();                 
-        var data = {
-            'action': 'afisha_posteroffon',            
-            'posteroffon': posteroffon
-        };
-        $.ajax({
-            url:'/wp-admin/admin-ajax.php', 
-            data:data, 
-            type:'POST', 
-            success:function(request){                                       
-               $('#show_post2').html(request);
-               $('#poster__btn').hide();                
-                               
-            }
-
-        });
-        
-    });   
-});
-
-// Событие после выбора исполнителя
-
-jQuery(function($){    
-    $( "#posterperformer" ).change(function() {
-        const posterperformerid = $('#posterperformer').val();                          
-        var data = {
-            'action': 'afisha_posterperformer',            
-            'posterperformerid': posterperformerid
-        };
-        $.ajax({
-            url:'/wp-admin/admin-ajax.php', 
-            data:data, 
-            type:'POST', 
-            success:function(request){
-                //$('#test3').html(request);                               
-                $('#show_post2').html(request);
-                $('#poster__btn').hide();          
-                               
-            }
-
-        });
-        
-    });   
-});
 
 

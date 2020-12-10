@@ -76,7 +76,7 @@ jQuery(function($){
   let files; 
     $('input[type=file]').on('change', function(){
        file = this.files;
-       $('#modal_submit').on('click',{param1: file}, function(event){         
+       $('#modal_submit_poster').on('click',{param1: file}, function(event){         
         let modal_date = document.querySelector('#modal_date');
         let getDateForm = new FormData(modal_date);
         getDateForm.append("action", "modal_afisha");        
@@ -98,46 +98,3 @@ jQuery(function($){
     });  
   }); 
 
-// Управление кнопками + и - 
-
-jQuery(function($){
-  const ShowHide = ( id ) => {  
-	  $(`#plus${id}`).on('click',function() {		
-      $(`.servisTextareahide${id+1}`).show();
-    }); 
-    $(`#minus${id}`).on('click',function() {		
-      $(`.servisTextareahide${id}`).hide();
-    });
-    $(`#minus10`).on('click',function() {		
-      $(`.servisTextareahide10`).hide();
-    });
-}   		
-  for(i=1;i<=9;i++){
-    ShowHide(i);		
-  }
-});
-
-// Прием данных с формы услуги 
-// и передача их на сервер
-
-
-jQuery(function($){  
-  $('#modal_servises').on('click', function(event){         
-    let modal_date = document.querySelector('#modal_form_servises');
-    let getServisesForm = new FormData(modal_date);
-    getServisesForm.append("action", "modal_form_servises");        
-        $.ajax({
-          url:'/wp-admin/admin-ajax.php', 
-          data:getServisesForm,
-          processData : false,
-          contentType : false, 
-          type:'POST', 
-          success:function(request){                      			
-            console.log( request );            								
-          },
-          error: function( err ) {
-            console.log( err );            	
-          }      
-      });
-    });  
-  }); 
