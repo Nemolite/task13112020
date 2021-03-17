@@ -1,0 +1,5 @@
+.clip-circle .cropper-face.cropper-move{
+  clip-path: circle(40% at 50% 50%);
+  opacity: 0.2;
+  background-color: #000000;
+}

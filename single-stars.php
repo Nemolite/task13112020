@@ -200,7 +200,23 @@
           </div>
           <div class="content fix7">
 		    <?php if($age > 0 || $block_right['height']):?>
-            <div class="parameters"><?php if($age > 0) echo $age.' лет / '; if($block_right['height']) echo $block_right['height'].' см';?></div>
+            <?php
+             function AgeToStr($Age)
+              {
+                $str='';
+                $num=$Age>100 ? substr($Age, -2) : $Age;
+                  if($num>=5&&$num<=14) $str = "лет";
+                  else
+                    {
+                    $num=substr($Age, -1);
+                    if($num==0||($num>=5&&$num<=9)) $str='лет';
+                    if($num==1) $str='год';
+                    if($num>=2&&$num<=4) $str='года';
+                    }
+             return ' '.$str;
+             }
+            ?>
+            <div class="parameters"><?php if($age > 0) echo $age . AgeToStr($age) .' / '; if($block_right['height']) echo $block_right['height'].' см';?></div>
             <?php endif;?>
             <?php if($block_right['cities']):?>
             <div class="cities"><?php echo implode(', ', array_column($block_right['cities'], 'label'));?></div>
@@ -228,7 +244,7 @@
                   <a class="btn-bg text-center fix-btn-bg" href="#" data-toggle="modal" data-target="#star-contacts">Показать контакты</a>
                 </div>
                 <div class="col-6 col-lg-4 fix-colums">
-                  <a class="btn-bgno text-center" href="#" data-toggle="modal" data-target="#services">Услуги</a>
+                  <a class="btn-bgno text-center" href="#" data-toggle="modal" data-target="#services">Показать услуги</a>
                 </div>
               </div>
             </div>
@@ -286,16 +302,19 @@ endif;
  <!-- Мероприятия -->
   <div class="container">
     <div class="single-afisha">
-      <h1>Мероприятия</h1>
-      <?php
-      $conut = 3;
-      $offset = 0;     
+      <h1>Мероприятия</h1>      
+      <?php     
+      $starsid = get_the_ID();         
       ?>
-      <?php do_action('allstars_single_stars_afisha_show',$conut, $offset)?>
-      <div id="show_afisha_star"></div>              
+      <?php $count = apply_filters( 'count_afisha_star', $starsid );?>
+      <div id="show_afisha_star" class="afisha_star_count">
+      <?php do_action('allstars_single_stars_afisha_show', $starsid )?>
+      </div>              
         <div class="single-afisha__footer">
-        <div class="single-afisha__footer-btn" id="single-afisha__footer-btn" >
-            <p class="single-afisha__input">Показать еще</p>
+        <div class="single-afisha__footer-btn" id="single-afisha__footer-btn" >        
+        
+        <p class="single-afisha__input" data-count="<?php echo $count;?>" >Показать еще</p>
+          
         </div>
         </div>       
       </div>
@@ -338,12 +357,13 @@ endif;
             case 'nal':
               echo "<p class=work_time >Оплата наличными</p> ";
 		          break;
+            case 'card':
+                echo "<p class=work_time>Оплата на карту</p> ";
+                break;   
             case 'cash':
               echo "<p class=work_time>Безналичный расчет</p> ";
               break;
-            case 'card':
-              echo "<p class=work_time>Оплата на карту</p> ";
-              break;                    }
+                              }
 				}
 				?>
               </div>

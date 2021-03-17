@@ -231,6 +231,16 @@ if(document.querySelector('#cities')){
         }
     }
   }
+  
+ if(document.querySelector('#postercity')){	
+    const select = document.querySelector('#postercity').getElementsByTagName('option');    
+        for (let i = 0; i < select.length; i++) {       
+         if (select[i].label === document.getElementById("geo_promo_cityname").innerText) 
+          {
+            select[i].selected = true;            						
+          }
+      }
+    }    
 
 jQuery(document).ready(function($) {		
 		jQuery('#submitid').click(function() {
@@ -242,26 +252,222 @@ jQuery(document).ready(function($) {
 
 // Привязка события к кнопке "Показать еще" в разделе мероприятия артиста
 
-jQuery(function($){  
-  let elemCount; 
-  let offset = 3;  
-  let showcount = 1;
-  $('#single-afisha__footer-btn').on('click',function(){                 
-      var data = {
-          'action': 'show_afisha_star',
-          'offset' : elemCount?elemCount:offset ,
-          'showcount': showcount
-      };
+jQuery(function($){   
+  const afishahide = ( count ) => { 
+    $(`.count-for-btn:nth-child(${count}`).hide();
+  }  
+
+  let countdiv = $('.single-afisha__input').attr('data-count'); 
+   
+    for(i=4;i<=countdiv;i++) {
+      afishahide( i );
+    }  
+
+  $('#single-afisha__footer-btn').on('click',function(){ 
+  
+    $('.count-for-btn').each(function( index, value ){
+     
+      console.log('Индекс: ' + index + '; Значение: ' + $(value).attr('style'));
+      if ($(value).attr('style') == "display: none;") {        
+        $(value).show();
+        elemCount = $('.count-for-btn').length-1;      
+        if (index == elemCount) {
+          $('.single-afisha__footer-btn').hide();
+        }
+        return false;
+      }
+     
+    })  
+  });
+
+ // скрытие кнопки
+   elemCount = $('.count-for-btn').length;       
+           
+   if (elemCount<=3) {
+       $('.single-afisha__footer-btn').hide();
+   }
+});	
+
+// Скрываем не активные стрелки
+
+jQuery(document).ready(function($) {		
+  jQuery('li.disabled').hide();
+});	
+
+// Скрываем кнопку биржа
+
+jQuery(document).ready(function($) {		
+  jQuery('.static-container__content').hide();
+});	
+
+// Фильтр выборки звезд (артистов )
+
+jQuery(function($){   
+  function viewer(request){     
+   
+    let filter = JSON.parse(request);    
+
+    let count_all = filter['count_all'];
+    let count_private = filter['count_frequent'];
+    let count_agency = filter['count_agency'];
+    $('#count_all_js').html(count_all);
+    $('#count_private_js').html(count_private);
+    $('#count_agency_js').html(count_agency);
+  } 
+  $( "#cities, #filter_specialization, #filter_profile_direction, input:radio[name=rating], input:radio[name=performers]" ).change(function() {        
+      let stars_filter = document.querySelector('#filter');
+      let getDateForm = new FormData(stars_filter);
+      
+      getDateForm.append("action", "allstars_filter_global"); 
       $.ajax({
           url:'/wp-admin/admin-ajax.php', 
-          data:data, 
-          type:'POST', 
-          success:function(data){                               
-              $('#show_afisha_star').append(data);
-              elemCount  = document.getElementsByClassName("single-afisha")[0].childElementCount;
-              console.log(elemCount);                
-          }
+          data:getDateForm,
+          processData : false,
+          contentType : false,              
+          type:'POST',  
+          success:function(request){                               
+            $('#stars').html(request);           
+            let stars_filter = document.querySelector('#filter');         
+
+            let city_quantity = $('#headercity').attr("data-city");          
+            let filter_city_quantity = $('#select2-cities-container').attr("title");  
+            let getFormCount = new FormData(stars_filter);
+
+            getFormCount.append("action", "allstars_filter_global_quantity");                            
+            getFormCount.append("header_city_quantity", city_quantity); 
+            getFormCount.append("filter_city_quantity", filter_city_quantity); 
+
+            $.ajax({
+              url:'/wp-admin/admin-ajax.php', 
+              data:getFormCount,
+              processData : false,
+              contentType : false,              
+              type:'POST',  
+               success:function(request){                                            
+                   viewer(request);                              
+                }  
+              }); 
+                             
+          }    
+
       });
+      
+  });   
+});
+
+// Фиксация фильтра при скроле 
+
+jQuery(document).ready(function($) {
+ 
+  	if(null!==document.querySelector("#filter-wrapper"))	{
+		let height_top = $("#filter-wrapper").offset().top;       
+
+		let content_sroll_height = $("#content_sroll").height(); 
+		let height_filter = $("#filter-wrapper").height();  
+		const bott = 75; // border-bottom
+    			
+		let stopScroll = ((height_top+content_sroll_height)- height_filter)-bott;   
+
+		let stopDown = (stopScroll-height_top)-bott; 
+        
+		$(window).scroll(function() {  
+			let footer_top = $(".polotno").offset().top;        
+
+			let sTop = $(window).scrollTop();    
+         
+			if(sTop > height_top &&(sTop < stopScroll)) {	      	
+			  jQuery("#filter-wrapper").css("position","sticky").css("top","42px" ).css("marginBottom","44px");        
+			} 
+      if(sTop > stopScroll) {
+          jQuery("#filter-wrapper").offset({top:stopScroll});        
+      }
+      if((sTop < height_top)) {
+        jQuery("#filter-wrapper").offset({top:height_top});      
+    }
+		});
+
+  }
+
+	});
+
+  // Фильтрация звезд по городам после загрузки страницы
+
+  jQuery(function($){ 
+    
+    function viewer(request){     
+   
+      let filter = JSON.parse(request);    
+
+      let count_all = filter['count_all'];
+      let count_private = filter['count_frequent'];
+      let count_agency = filter['count_agency'];
+      $('#count_all_js').html(count_all);
+      $('#count_private_js').html(count_private);
+      $('#count_agency_js').html(count_agency);
+    }
+        let city = $('#headercity').attr("data-city");          
+        let filter_city = $('#select2-cities-container').attr("title");      
+
+        let getDateForm = new FormData();       
+        
+        getDateForm.append("action", "allstars_filter_global"); 
+        getDateForm.append("header_sity", city); 
+        getDateForm.append("filter_city", filter_city); 
+        $.ajax({
+            url:'/wp-admin/admin-ajax.php', 
+            data:getDateForm,
+            processData : false,
+            contentType : false,              
+            type:'POST',  
+            success:function(request){                               
+              $('#stars').html(request);              
+
+              let city_quantity = $('#headercity').attr("data-city");          
+              let filter_city_quantity = $('#select2-cities-container').attr("title");  
+              let getFormCount = new FormData();
+
+              getFormCount.append("action", "allstars_filter_global_quantity");                            
+              getFormCount.append("header_city_quantity", city_quantity); 
+              getFormCount.append("filter_city_quantity", filter_city_quantity); 
+
+              $.ajax({
+                url:'/wp-admin/admin-ajax.php', 
+                data:getFormCount,
+                processData : false,
+                contentType : false,              
+                type:'POST',  
+                 success:function(request){                                            
+                     viewer(request);                              
+                  }  
+                });                                   
+                               
+            }   
+        });   
+  
   });
-});	
-	
+  jQuery(function($){ 
+
+  $.datepicker.regional['ru'] = {
+    closeText: 'Закрыть',
+    prevText: 'Предыдущий',
+    nextText: 'Следующий',
+    currentText: 'Сегодня',
+    monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+    monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
+    dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+    dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+    dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+    weekHeader: 'Не',
+    dateFormat: 'dd.mm.yy',
+    firstDay: 1,
+    isRTL: false,
+    showMonthAfterYear: false,
+    yearSuffix: ''
+  };
+  $.datepicker.setDefaults($.datepicker.regional['ru']); 
+
+  });
+
+  jQuery(function(){
+    jQuery(".posterdate").datepicker();
+  });

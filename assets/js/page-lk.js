@@ -74,9 +74,10 @@ jQuery(function($){
 
 jQuery(function($){  
   let files; 
-    $('input[type=file]').on('change', function(){
+    $('input[type=file]').on('change', function(){     
        file = this.files;
        $('#modal_submit_poster').on('click',{param1: file}, function(event){         
+        alert("Мероприятие создано");  
         let modal_date = document.querySelector('#modal_date');
         let getDateForm = new FormData(modal_date);
         getDateForm.append("action", "modal_afisha");        
@@ -86,7 +87,8 @@ jQuery(function($){
           processData : false,
           contentType : false, 
           type:'POST', 
-          success:function(request){                       			
+          success:function(request){
+            alert("Мероприятие с данным хештегом уже создано");                       			
             console.log( request );								
           },
           error: function( err ) {
@@ -97,4 +99,41 @@ jQuery(function($){
       });
     });  
   }); 
+
+// Добавление слово "Руб."
+jQuery(function($){
+    let peid = $("#peid_servis-afisha .acf-input .acf-input-wrap input").val();
+      $("#peid_servis-afisha .acf-input .acf-input-wrap").append( "<p class=\"in_rub\">Руб.</p>" );   
+
+      $("#peid_servis-afisha .acf-input .acf-input-wrap input").blur();
+
+}); 
+
+// Добавление стилей в заголовок таблицы услуги
+jQuery(function($){  
+  $("#servises_acf table thead tr th").css("background-color","#aa219e"); 
+  $("#servises_acf table thead tr th").css("text-align","center"); 
+  $("#servises_acf table thead tr th").css("color","#fff"); 
+  $("#servises_acf table thead tr th").css("font-size","26px"); 
+  $("#servises_acf table thead tr th").css("font-weight","300");   
+}); 
+
+// Добавление № - в первую графу заголовка
+jQuery(function($){  
+  $("#servises_acf table thead tr th:first-child").html("<p>&#8470</p>");   
+}); 
+
+// Добавление +/- и расширение колнки
+jQuery(function($){  
+  $("#servises_acf table thead tr th:last-child").css("padding","0px 23px");
+  $("#servises_acf table thead tr th:last-child").html("<p>+/-</p>");
+  $(".acf-repeater .acf-row-handle .acf-icon").css("margin-top","6px");
+  $(".acf-repeater .acf-row-handle .acf-icon").css("margin-left","20px");
+ 
+}); 
+
+ 
+
+
+
 

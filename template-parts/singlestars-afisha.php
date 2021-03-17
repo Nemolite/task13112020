@@ -4,7 +4,7 @@
  *  Личный кабинет и на front
  */
 ?>
-<div class="row">
+<div class="row count-for-btn" >
          <div class="col-md-4">
             <div class="single-afisha__img">
                 <?php the_post_thumbnail();?>
@@ -33,10 +33,18 @@
               <?php if( !empty(get_field('url_online')) ): ?>
                 <a class="single-afisha_place_url" href="<?php the_field('url_online'); ?>">Online</a>
               <?php endif?>                          
-              <p class="single-afisha_date"><?php echo the_field('postdate'); ?></p>
+              <p class="single-afisha_date"><?php
+                $date = get_field('postdate');
+				echo $date;
+                //$date2 = date("j F Y, H:i", strtotime($date));
+                //echo $date2;              
+              ?></p>
               <div class="single-afisha_description"><?php the_content(); ?>       
-                </div> 
-             
+                </div>       
+          </div>
+<div class="btn-block">
+<div class="row justify-content-end">
+<div class="col-12 col-sm-6 col-md-6 col-xl-3 col-lg-3 fix-poster_outlink">        
               <a id="poster_outlink" href="<?php the_field('postregurl');?>" target="_blank">
                 <div class="single-afisha__btn-invers">
                     <div class="poster_sale" id="poster_sale">      
@@ -44,6 +52,8 @@
                     </div>
                 </div>
                 </a> 
+</div> 
+<div class="col-12 col-sm-6 col-md-6 col-xl-3 col-lg-3"> 
                            
              <?php if (get_field('postsale')) :?>
                 <a id="poster_outlink" href="<?php the_field('postsaleurl');?>" target="_blank">
@@ -62,7 +72,9 @@
                     </div>
                 </div>
                 </a>  
-            <?php endif ?>         
-          </div>           
-         </div>         
-        </div> 
+            <?php endif ?>
+</div>           
+</div> 
+</div>   
+</div>         
+</div> 

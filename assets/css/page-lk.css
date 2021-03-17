@@ -1,7 +1,7 @@
 /* Модальное окно Услуги*/
 
 #modal-dialog-servises {
-  max-width: 700px;
+  max-width: 880px;
 }
 
 #servisesModal input[type="submit"] {
@@ -174,7 +174,7 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin-right: -15px;
-  margin-left: -15px;
+  margin-left: -5px;
 }
 
 .acf-field .main_img.icon_bg .acf-input {
@@ -290,12 +290,97 @@
     height: auto;
   }
 }
-/*#acf-field_5f0da622008a7-field_5f0daf7a008bc {
-  cursor: pointer;
-  border: 1px solid red;
-  font-size: 0;
-}*/
+
 #group_1 .acf-input {
   position: sticky;
   top: 0;
+}
+
+#servis-afisha textarea {
+  border: none;
+}
+
+#peid_servis-afisha input {
+  border: none;
+  margin-left: 30%;
+  width: 100px;
+}
+
+.in_rub {
+  position: relative;
+  left: 185px;
+  top: -33px;
+  font-size: 16px;
+}
+
+#peid_servis-afisha .acf-input-wrap {
+  height: 35px;
+}
+
+#servises_acf > table > thead > tr {
+  background-color: #aa219e;
+}
+
+.modal-title {
+  margin: 0 auto;
+  font-weight: 700;
+  font-size: 36px;
+}
+
+#servises_acf .acf-label {
+  display: none;
+}
+
+.acf-table > thead > tr > th:first-child {
+  width: 7%;
+}
+
+#servis-afisha .acf-input textarea {
+  font-size: 15px;
+  font-family: Nunito-Light, sans-serif;
+  font-weight: 300;
+}
+
+#servises_acf .acf-repeater .acf-row-handle.order {
+  background: none;
+}
+
+#servises_acf .acf-repeater .acf-row-handle.order span {
+  font-size: 24px;
+  font-family: Nunito, sans-serif;
+  color: black;
+}
+
+#servises_acf .acf-repeater > table {
+  border: 1.85px solid black;
+}
+
+#servises_acf .acf-table > tbody > tr > td {
+  border-color: black;
+}
+
+.acf-table > tbody > tr > th,
+.acf-table > thead > tr > th {
+  width: 55%;
+}
+
+.clip-circle .cropper-face.cropper-move {
+  clip-path: circle(40% at 50% 50%);
+  opacity: 0.2;
+  background-color: #000000;
+}
+.clip-circle .cropper-crop-box:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 29%);
+  height: calc(100% - 7%);
+  background: transparent;
+  margin: auto;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 1px solid #545558;
+  pointer-events: none;
 }

@@ -17,29 +17,35 @@
     <form action="" method="POST" name="super_filter" id="super_filter">   
     <div class="poster__filter">
       <div class="row">
-        <div class="col-sm-6 col-md-6 col-12">
+        <div class="col-sm-12 col-md-6 col-12">
           <div class="row">
-           <div class="col-sm-6 col-6">
+           <div class="col-sm-6 col-12">
             <div class="poster__date">            
-             <input type="date" name="posterdate" id="posterdate" class="posterdate">
+             <input type="text" name="posterdate" id="posterdate" class="posterdate" placeholder="Выберите дату">
             </div>                       
            </div>
-           <div class="col-sm-6 col-6">
+           <div class="col-sm-6 col-12">
             <div class="poster__city">            
               <select name="postercity" id="postercity" class="postercity">
               <option value disabled selected>Выберите город</option>
-                <?php $cities = allstars_get_full_cities();?>
-				<?php foreach($cities as $key => $val){ ?>
-					<option value="<?php echo $key ?>"><?php echo $val ?></option>
-				<?php } ?>	
+                <?php $cities = allstars_get_full_cities();
+                if(isset($_POST['postercity']) && $_POST['postercity'] != ''){
+                  $selected_city = $_REQUEST['postercity'];		
+                } else{
+                  $selected_city = $_COOKIE['geo_promo_city'];
+                }
+                ?>
+                <?php foreach($cities as $key => $val){ ?>
+                  <option value="<?php echo $key ?>" <?php selected($selected_city, $val);?>><?php echo $val ?></option>
+                <?php } ?>	
               </select>
             </div>
            </div>
         </div> 
       </div>
-        <div class="col-sm-6 col-md-6 col-12">
+        <div class="col-sm-12 col-md-6 col-12">
         <div class="row">
-        <div class="col-sm-6 col-6">
+        <div class="col-sm-6 col-12">
         <div class="poster__offon">
           <select name="posteroffon" id="posteroffon" class="posteroffon">
             <option value disabled selected>Формат мероприятия</option>
@@ -49,7 +55,8 @@
           </select>
         </div>
         </div>
-        <div class="col-sm-6 col-6">
+        <!--
+        <div class="col-sm-6 col-12">
           <div class="poster__performer">
             <select name="posterperformer" id="posterperformer" class="posterperformer">
             <option value disabled selected>Выберите исполнителя</option>
@@ -60,6 +67,7 @@
             </select>
           </div>
         </div>
+        -->
         </div>
 
         </div>
@@ -80,10 +88,9 @@
      *  
      */    
     ?>          
-    <div id="test3"></div>   
     <div class="row poster_counter" id="show_post2">      
       <?php 
-      $count = 18; //количество выводимых постов
+      $count = 15; //количество выводимых постов
       $offset = 0; // смещение от начало постов
       do_action('allstras_poster_form_before', $count, $offset);
       ?> 
@@ -91,9 +98,12 @@
     <div id="show_post"></div>             
       <div class="poster__footer">
       <!-- На кнопку привязана событие см. poster.js-->
-        <div class="poster__btn" id="poster__btn">
-          <p class="poster__input">Показать еще</p>          
+      <?php $counter = apply_filters( 'allstars_poster_full_count', $offset);?>     
+      <?php if( 15 < $counter)  {?>
+        <div class="poster__btn" id="poster__btn" data-counter="<?php echo $counter;?>">
+          <p class="poster__input" >Показать еще</p>          
         </div>
+        <?php }?>  
       </div>      
     </div>
 </div>

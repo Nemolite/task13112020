@@ -98,8 +98,7 @@ if ( !is_user_logged_in() ){
     }
     
     return $field;
-  }
-  // применяем фильтр через хук
+  } 
   add_filter('acf/prepare_field', 'allstars_acf_prepare_field');
  
   acf_form_head();
@@ -115,13 +114,14 @@ if ( !is_user_logged_in() ){
         return $uploader;
       }
       acf_form(array(
+	   'id' => 'acf-page_lk',
         'post_id'       => $post_id, 		
         'post_title'    => false,     
         'post_content'  => false,
         'fields' => array('field_5f0da43e008a1','field_5f0da622008a7'),
         'uploader' => 'basic',  
         'submit_value'  => __('Сохранить', 'allstars'), 		
-        'html_submit_button'  => '<button type="button" class="btn add_modal" data-toggle="modal" data-target="#servisesModal" data-whatever="@getbootstrap">Управление услугами</button><button type="button" class="btn add_modal" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Создать мероприятие</button><input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',	
+        'html_submit_button'  => '<button type="button" class="btn add_modal" id="fix_messege" data-toggle="modal" data-target="#servisesModal" data-whatever="@getbootstrap">Управление услугами</button><button type="button" class="btn add_modal" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Создать мероприятие</button><input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',	
         'html_before_fields' => '<div class="row">',		
 	      'html_after_fields' => '</div>',		
         'updated_message' => __('Информация обновлена', 'allstars')
@@ -137,11 +137,12 @@ if ( !is_user_logged_in() ){
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Управление услугами</h4>
+        <h2 class="modal-title" id="myModalLabel">Управление услугами</h2>
       </div>
       <div class="modal-body">
-        <?php
+        <?php       
       acf_form(array(
+	    'id' => 'acf_form_servises',
         'post_id'       => $post_id,		
         'post_title'    => false,    
         'post_content'  => false,   
@@ -151,7 +152,8 @@ if ( !is_user_logged_in() ){
         'html_submit_button'  => '<input type="submit" class="acf-button button button-primary button-large button--gray" value="%s" />',
         'html_before_fields' => '<div class="row">',		
 	      'html_after_fields' => '</div>',
-        'updated_message' => __('Информация по услугам обновлена', 'allstars')
+        'updated_message' => false,
+        'html_updated_message'=> '<div id="message_service_upload" class="updated"><p>%s</p></div>'
       )); ?>
       </div>    
     </div>  
@@ -166,13 +168,19 @@ if ( !is_user_logged_in() ){
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="exampleModalLabel">Мероприятия</h4>
+          <h4 class="modal-title" id="exampleModalLabel">Мероприятие</h4>
         </div>
         <div class="modal-body">
           <form action="" method="POST" name="modal_date" id="modal_date" enctype="multipart/form-data">
+          <?php wp_nonce_field('name_of_my_action','name_of_nonce_field'); ?>
             <div class="form-group">
               <label for="recipient_name" class="form-control-label">Название мероприятия</label>
-              <input type="text" class="form-control" id="recipient_name" name="recipient_name">
+              <input type="text" class="form-control" id="recipient_name" name="recipient_name" required>              
+            </div>
+
+            <div class="form-group">
+              <label for="key_word_afisha" class="form-control-label">Ключевое слово ( #хештег )</label>
+              <input type="text" class="form-control" id="key_word_afisha" name="key_word_afisha" maxlength="50" required>              
             </div>
 
             <fieldset class="form-group" id="form-group-radio-place">				
@@ -191,7 +199,16 @@ if ( !is_user_logged_in() ){
                    </label>
                 </div>        
             </div>
-            </fieldset>			
+            </fieldset>	
+            <div class="form-group">
+				<label for="exampleSelect1">Город проведения мероприятия</label>
+				<select class="form-control" id="exampleSelect1" name="exampleSelect1">
+				<?php $cities = wpr_promo_static_field('cities');?>
+				<?php foreach($cities as $key => $val){ ?>
+					<option value="<?php echo $key ?>"><?php echo $val ?></option>
+				<?php } ?>										
+				</select>
+			</div>		
 			     <div class="form-group show-radio-reg-place">
               <label for="place_name" class="form-control-label">Место проведения мероприятия</label>
               <input type="text" class="form-control" id="place_name" name="place_name">
@@ -201,32 +218,24 @@ if ( !is_user_logged_in() ){
 				<input class="form-control" type="url" placeholder="http://allstars.ru" id="example_url_reg_place" name="example_url_reg_place">
 			</div>
 
-			<div class="form-group">
-				<label for="exampleSelect1">Город проведения мероприятия</label>
-				<select class="form-control" id="exampleSelect1" name="exampleSelect1">
-				<?php $cities = wpr_promo_static_field('cities');?>
-				<?php foreach($cities as $key => $val){ ?>
-					<option value="<?php echo $key ?>"><?php echo $val ?></option>
-				<?php } ?>										
-				</select>
-			</div>
+			
 			<div class="form-group">
 				<label for="example_date_input">Дата проведения мероприятия</label>  
-				<input class="form-control" type="date" placeholder="гггг-мм-дд" id="example_date_input" name="example_date_input">
+				<input class="form-control" type="date" placeholder="гггг-мм-дд" id="example_date_input" name="example_date_input" required>
 			</div>			
 			<div class="form-group">
 				<label for="example_time_input" class="col-xs-2 col-form-label">Время проведения мероприятия</label>  
-				<input class="form-control" type="time" placeholder="чч:мм" id="example_time_input" name="example_time_input">  
+				<input class="form-control" type="time" placeholder="чч:мм" id="example_time_input" name="example_time_input" required>  
 			</div>
       <div class="form-group">
 				<label for="exampleInputFile">Загрузите фото для анонса мероприятия</label>							
-				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="exampleInputFile">
+				<input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" name="exampleInputFile" accept="image/jpeg,image/png,image/gif">
 				<small id="fileHelp" class="form-text text-muted">* Вы можете загрузить фото (jpg) не более 4Мб</small>
 				<small id="fileHelp" class="form-text text-muted">* Рекомендуемый размер изображения 400х250</small>
       </div>
 			<div class="form-group">
 				<label for="exampleTextarea">Анонс ( Описание мероприятия )</label>
-				<textarea class="form-control" id="exampleTextarea" name="exampleTextarea" rows="3" maxlength="255"></textarea>
+				<textarea class="form-control" id="exampleTextarea" name="exampleTextarea" rows="3" maxlength="300"></textarea>
       </div>      					
 			<fieldset class="form-group" id="form-group-radio">				
 				<label for="place-name" class="form-control-label">Мероприятие ( Платное/Бесплатное )</label>
@@ -275,20 +284,33 @@ if ( !is_user_logged_in() ){
    <div class="container">
     <div class="single-afisha">
       <h1>Мероприятия</h1>
-      <?php
-      $conut = 3;
-      $offset = 0;         
+      <?php    
+      if( is_page( 'lk' ) ){  
+                     
+          $args = array(
+              'post_type' => 'stars',
+              'author' => get_current_user_id(),                        
+          );
+          $post = get_posts($args);        
+          setup_postdata($post);        
+          foreach( $post as $p ){ 
+              $starsid = $p->ID;                                    
+          }       
+          wp_reset_postdata();                 
+      }
       ?>      
-      <?php do_action('allstars_single_stars_afisha_show',$conut, $offset)?>
-      <div id="show_afisha_star"></div>              
+       <?php $count = apply_filters( 'count_afisha_star', $starsid );        
+       ?>
+      <div id="show_afisha_star" class="afisha_star_count">
+      <?php do_action('allstars_single_stars_afisha_show' ,$starsid )?>
+      </div>              
         <div class="single-afisha__footer">
         <div class="single-afisha__footer-btn" id="single-afisha__footer-btn" >
-            <p class="single-afisha__input">Показать еще</p>
+        <p class="single-afisha__input" data-count="<?php echo $count;?>">Показать еще</p>
         </div>
-
         </div>       
       </div>
-  </div> 
+  </div>
   <!-- Мероприятия end --> 
   <?php 
   // Блок отображения отзывов
@@ -313,32 +335,9 @@ if ( !is_user_logged_in() ){
     </div>
   </div><!-- .reviews -->
   <?php endif; //$comments ?>
-  <?php if(have_rows('orders', 'options')):?>
-  <div class="orders">
-    <div class="container">
-	
-      <div class="h1">Хотите получить больше заказов?</div>
-      <div class="row">
-        <?php $i = 1;
-        while( have_rows('orders', 'options') ) : the_row();?>
-        <div class="col-12 col-lg-6 mb-4">
-          <div class="item color_<?php echo $i;?>">
-            <div class="name"><?php the_sub_field('title');?></div>
-            <div class="desc"><?php the_sub_field('desc');?></div>
-            <div class="bottom">
-              <div class="price"><?php echo number_format(get_sub_field('price'), 0, ',', ' ');?> руб.</div>
-              <div class="submit">
-                <?php echo do_shortcode('[wp_sber_btn class="button" amount="'.get_sub_field('price').'" type="'.get_sub_field('code').'"]');?>
-              </div>
-            </div>
-          </div>
-        </div>
-        <?php $i++; if($i > 4){ $i = 1;} endwhile;?>
-      </div>
-    </div>  
-  </div>
-  <?php endif; //orders ?>
+
+  <?php // get_template_part('template-parts/lk','orders'); ?>
+
   <?php endwhile;?>  
-  
   <?php acf_enqueue_uploader(); get_footer();
 }
